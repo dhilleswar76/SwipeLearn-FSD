@@ -128,6 +128,13 @@
         <h2 class="result-title" id="result-title">Quiz Complete!</h2>
         <div class="result-score-ring" id="result-score-ring">
           <svg viewBox="0 0 120 120">
+            <defs>
+              <linearGradient id="ringGradLocal" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#7c5cfc" stop-opacity="1" />
+                <stop offset="50%" stop-color="#fc5ca0" stop-opacity="1" />
+                <stop offset="100%" stop-color="#5cf0fc" stop-opacity="1" />
+              </linearGradient>
+            </defs>
             <circle cx="60" cy="60" r="52" class="ring-track"/>
             <circle cx="60" cy="60" r="52" class="ring-fill" id="ring-fill"/>
           </svg>
@@ -148,17 +155,6 @@
     </section>
 
   </div><!-- /#app -->
-
-  <!-- SVG Gradients -->
-  <svg class="is-hidden" aria-hidden="true" focusable="false">
-    <defs>
-      <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#7c5cfc" stop-opacity="1" />
-        <stop offset="50%" stop-color="#fc5ca0" stop-opacity="1" />
-        <stop offset="100%" stop-color="#5cf0fc" stop-opacity="1" />
-      </linearGradient>
-    </defs>
-  </svg>
 
   <!-- Main App Script -->
   <script type="module" src="js/app.js"></script>

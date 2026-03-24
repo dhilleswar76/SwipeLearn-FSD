@@ -134,7 +134,9 @@ export class SwipeLearnApp {
   }
 
   showResult(result) {
-    const percentage = Math.round((result.score / result.total) * 100);
+    const percentage = result.total > 0
+      ? Math.max(0, Math.min(100, Math.round((result.score / result.total) * 100)))
+      : 0;
     const ringFill = getEl('ring-fill');
     const ringText = getEl('ring-text');
     const resultMsg = getEl('result-msg');
@@ -165,12 +167,28 @@ export class SwipeLearnApp {
     resultTrophy.textContent = trophy;
     resultMsg.textContent = message;
 
-    const strokeDasharray = ringFill.getAttribute('stroke-dasharray');
-    const offset = strokeDasharray * (1 - percentage / 100);
-    ringFill.style.strokeDashoffset = offset;
-
     this.switchStage('result');
-    this.confetti.burst();
+
+    // Animate after the result screen is visible to ensure reliable ring fill.
+    if (ringFill) {
+      const radius = ringFill.r?.baseVal?.value || Number(ringFill.getAttribute('r')) || 52;
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference * (1 - percentage / 100);
+
+      ringFill.style.transition = 'none';
+      ringFill.style.strokeDasharray = `${circumference} ${circumference}`;
+      ringFill.style.strokeDashoffset = `${circumference}`;
+
+      // Force layout so reset state is applied before animating to target.
+      void ringFill.getBoundingClientRect();
+
+      ringFill.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s';
+      ringFill.style.strokeDashoffset = `${offset}`;
+    }
+
+    if (result.score >= 4) {
+      this.confetti.burst();
+    }
   }
 
   retryQuiz() {
