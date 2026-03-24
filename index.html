@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SwipeLearn — LMS</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  
+  <!-- Icon Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+  
+  <!-- CSS Modular Imports -->
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/quiz.css" />
+</head>
+<body>
+
+  <!-- BACKGROUND ORBS -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- NOISE OVERLAY -->
+  <div class="noise"></div>
+
+  <!-- APP WRAPPER -->
+  <div id="app">
+
+    <!-- ── SPLASH SCREEN ── -->
+    <section id="screen-splash" class="screen active">
+      <div class="splash-inner">
+        <div class="logo-mark">
+          <span class="logo-icon">⚡</span>
+        </div>
+        <h1 class="splash-title">SwipeLearn</h1>
+        <p class="splash-sub">Pick your path in seconds.<br/>Browse with arrows and click a card to select.</p>
+        <button id="btn-start" class="btn-primary">
+          <span>Start Learning</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <p class="splash-hint">Click card to select · Use arrows to move previous/next</p>
+      </div>
+    </section>
+
+    <!-- ── CARD SCREEN ── -->
+    <section id="screen-cards" class="screen">
+      <!-- Header -->
+      <header class="app-header">
+        <button id="btn-back" class="btn-back is-hidden" title="Go back" aria-label="Go back">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="breadcrumb" id="breadcrumb"></div>
+        <div class="header-spacer"></div>
+      </header>
+
+      <!-- Stage label -->
+      <div class="stage-label" id="stage-label">Choose Your Branch</div>
+
+      <!-- Card stack container -->
+      <div class="card-arena" id="card-arena">
+        <div class="card-stack" id="card-stack"></div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="action-bar">
+        <button class="act-btn act-skip" id="act-skip" title="Previous Card">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="card-counter" id="card-counter">1 / 1</div>
+        <button class="act-btn act-pick" id="act-pick" title="Next Card">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- ── QUIZ SCREEN ── -->
+    <section id="screen-quiz" class="screen">
+      <header class="app-header">
+        <button id="btn-quiz-back" class="btn-back" title="Go back" aria-label="Go back">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="quiz-topic-label" id="quiz-topic-label"></div>
+        <div class="header-spacer"></div>
+      </header>
+
+      <div class="quiz-wrap">
+        <!-- Progress -->
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-track">
+            <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+          </div>
+          <div class="quiz-q-num" id="quiz-q-num">1 / 5</div>
+        </div>
+
+        <!-- Score -->
+        <div class="quiz-score-badge" id="quiz-score-badge">
+          <i class="fa-solid fa-star"></i>
+          <span id="quiz-score-text">0</span>
+        </div>
+
+        <!-- Question card -->
+        <div class="quiz-card" id="quiz-card">
+          <div class="quiz-question" id="quiz-question">Loading...</div>
+          <div class="quiz-options" id="quiz-options"></div>
+        </div>
+
+        <!-- Next button -->
+        <button class="btn-next is-hidden" id="btn-next">
+          Next <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- ── RESULT SCREEN ── -->
+    <section id="screen-result" class="screen">
+      <div class="result-inner">
+        <div class="result-trophy" id="result-trophy">🏆</div>
+        <h2 class="result-title" id="result-title">Quiz Complete!</h2>
+        <div class="result-score-ring" id="result-score-ring">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="52" class="ring-track"/>
+            <circle cx="60" cy="60" r="52" class="ring-fill" id="ring-fill"/>
+          </svg>
+          <div class="ring-text" id="ring-text">0/5</div>
+        </div>
+        <p class="result-msg" id="result-msg"></p>
+        <div class="result-actions">
+          <button class="btn-primary" id="btn-retry">
+            <i class="fa-solid fa-rotate-right"></i> Retry Quiz
+          </button>
+          <button class="btn-secondary" id="btn-home">
+            <i class="fa-solid fa-house"></i> Home
+          </button>
+        </div>
+      </div>
+      <!-- Confetti canvas -->
+      <canvas id="confetti-canvas"></canvas>
+    </section>
+
+  </div><!-- /#app -->
+
+  <!-- SVG Gradients -->
+  <svg class="is-hidden" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#7c5cfc" stop-opacity="1" />
+        <stop offset="50%" stop-color="#fc5ca0" stop-opacity="1" />
+        <stop offset="100%" stop-color="#5cf0fc" stop-opacity="1" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Main App Script -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
+
+
