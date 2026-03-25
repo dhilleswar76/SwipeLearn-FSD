@@ -194,7 +194,7 @@ export class SwipeLearnApp {
 
   logout() {
     localStorage.removeItem(SESSION_KEY);
-    window.location.href = 'html/login.html';
+    window.location.href = 'login.html';
   }
 
   showEmpty() {
@@ -211,7 +211,7 @@ export class SwipeLearnApp {
 
   init() {
     if (!localStorage.getItem(SESSION_KEY)) {
-      window.location.href = 'html/login.html';
+      window.location.href = 'login.html';
       return;
     }
 
