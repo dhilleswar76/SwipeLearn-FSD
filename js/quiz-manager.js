@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════
-   SwipeLearn — js/quiz-manager.js
-   ═══════════════════════════════════════════
-   Quiz logic & rendering
-═══════════════════════════════════════════ */
-
 import { getEl, shuffle } from './utils.js';
 
 export class QuizManager {
@@ -52,16 +46,13 @@ export class QuizManager {
     const btnNext = getEl('btn-next');
     const scoreText = getEl('quiz-score-text');
 
-    // Question
     qEl.textContent = q.q;
 
-    // Progress
     const progress = ((this.currentQuestion + 1) / this.totalQuestions) * 100;
     progressBar.style.width = progress + '%';
     qNum.textContent = `${this.currentQuestion + 1} / ${this.totalQuestions}`;
     if (scoreText) scoreText.textContent = String(this.score);
 
-    // Options
     optionsEl.innerHTML = '';
     q.opts.forEach((opt, idx) => {
       const div = document.createElement('div');
@@ -83,7 +74,6 @@ export class QuizManager {
       optionsEl.appendChild(div);
     });
 
-    // Hide next until user answers current question.
     btnNext.classList.add('is-hidden');
     const nextLabel = this.currentQuestion === this.totalQuestions - 1 ? 'Finish Quiz' : 'Next';
     btnNext.innerHTML = `${nextLabel} <i class="fa-solid fa-arrow-right"></i>`;
@@ -112,7 +102,6 @@ export class QuizManager {
       opt.classList.add('disabled');
     });
 
-    // Show next button only after selecting an option.
     const btnNext = getEl('btn-next');
     btnNext.classList.remove('is-hidden');
 
@@ -143,3 +132,5 @@ export class QuizManager {
       .forEach(l => l.callback(data));
   }
 }
+
+

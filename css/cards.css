@@ -1,10 +1,3 @@
-/* ═══════════════════════════════════════════
-   SwipeLearn — css/cards.css
-   ═══════════════════════════════════════════
-   Card styles for arrow-based selection
-═══════════════════════════════════════════ */
-
-/* Card Arena */
 .card-arena {
   flex: 1;
   position: relative;
@@ -22,7 +15,6 @@
   height: 420px;
 }
 
-/* Single visible card */
 .swipe-card {
   position: relative;
   width: 100%;
@@ -48,7 +40,6 @@
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
 }
 
-/* Card shimmer line */
 .swipe-card::before {
   content: '';
   position: absolute;
@@ -60,7 +51,6 @@
   border-radius: 50%;
 }
 
-/* Icon wrapper */
 .card-icon-wrap {
   width: 90px;
   height: 90px;
@@ -91,7 +81,6 @@
   font-size: 50px;
 }
 
-/* Card content */
 .card-title {
   font-family: var(--font-head);
   font-size: 26px;
@@ -124,7 +113,6 @@
   text-transform: uppercase;
 }
 
-/* Stage-specific tag colors */
 .swipe-card[data-stage="branch"] .card-tag {
   background: rgba(124, 92, 252, 0.18);
   border-color: rgba(124, 92, 252, 0.35);
@@ -143,7 +131,6 @@
   color: var(--yes);
 }
 
-/* Action bar */
 .action-bar {
   display: flex;
   align-items: center;
@@ -197,7 +184,6 @@
   text-align: center;
 }
 
-/* Card meta */
 .card-meta {
   display: inline-flex;
   align-items: center;
@@ -212,7 +198,6 @@
   letter-spacing: 0.4px;
 }
 
-/* Responsive */
 @media (max-width: 400px) {
   .card-stack {
     width: 300px;
@@ -234,3 +219,5 @@
     height: 340px;
   }
 }
+
+

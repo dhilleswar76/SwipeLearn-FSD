@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════
-   SwipeLearn — branches.js
-   ═══════════════════════════════════════════
-   BRANCHES DATA - All B.TECH Branches
-═══════════════════════════════════════════ */
-
 const BRANCHES_DATA = [
   {
     id: "cse",
@@ -43,3 +37,5 @@ const BRANCHES_DATA = [
 ];
 
 export { BRANCHES_DATA };
+
+

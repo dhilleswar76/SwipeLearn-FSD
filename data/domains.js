@@ -1,11 +1,5 @@
-/* ═══════════════════════════════════════════
-   SwipeLearn — domains.js
-   ═══════════════════════════════════════════
-   DOMAINS DATA - All B.TECH Branches
-═══════════════════════════════════════════ */
-
 const DOMAINS_DATA = {
-  /* ══════════ CSE Domains ══════════ */
+  
   cse: [
     {
       id: "web",
@@ -79,7 +73,7 @@ const DOMAINS_DATA = {
     }
   ],
 
-  /* ══════════ ECE Domains ══════════ */
+  
   ece: [
     {
       id: "signals",
@@ -104,7 +98,7 @@ const DOMAINS_DATA = {
     }
   ],
 
-  /* ══════════ EEE Domains ══════════ */
+  
   eee: [
     {
       id: "circuits",
@@ -129,7 +123,7 @@ const DOMAINS_DATA = {
     }
   ],
 
-  /* ══════════ MECH Domains ══════════ */
+  
   mech: [
     {
       id: "thermo",
@@ -154,7 +148,7 @@ const DOMAINS_DATA = {
     }
   ],
 
-  /* ══════════ CIVIL Domains ══════════ */
+  
   civil: [
     {
       id: "structural",
@@ -181,3 +175,5 @@ const DOMAINS_DATA = {
 };
 
 export { DOMAINS_DATA };
+
+

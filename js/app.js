@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════
-   SwipeLearn — js/app.js
-   ═══════════════════════════════════════════
-   Main application logic & flow
-═══════════════════════════════════════════ */
-
 import { BRANCHES_DATA } from '../data/branches.js';
 import { DOMAINS_DATA } from '../data/domains.js';
 import { TOPICS_DATA } from '../data/topics.js';
@@ -11,6 +5,8 @@ import { CardManager } from './card-manager.js';
 import { QuizManager } from './quiz-manager.js';
 import { Confetti } from './confetti.js';
 import { getEl, formatBreadcrumb } from './utils.js';
+
+const SESSION_KEY = 'swipelearn-session';
 
 export class SwipeLearnApp {
   constructor() {
@@ -28,14 +24,11 @@ export class SwipeLearnApp {
   }
 
   setupEventListeners() {
-    // Splash screen
     getEl('btn-start').addEventListener('click', () => this.startApp());
 
-    // Navigation
     getEl('btn-back').addEventListener('click', () => this.goBack());
     getEl('btn-quiz-back').addEventListener('click', () => this.goBack());
 
-    // Card navigation - Arrow buttons
     getEl('act-skip').addEventListener('click', () => {
       if (this.cardManager) this.cardManager.previousCard();
     });
@@ -43,12 +36,10 @@ export class SwipeLearnApp {
       if (this.cardManager) this.cardManager.nextCard();
     });
 
-    // Quiz
     getEl('btn-next').addEventListener('click', () => {
       if (this.quizManager) this.quizManager.nextQuestion();
     });
 
-    // Results
     getEl('btn-retry').addEventListener('click', () => this.retryQuiz());
     getEl('btn-home').addEventListener('click', () => this.goHome());
   }
@@ -169,7 +160,6 @@ export class SwipeLearnApp {
 
     this.switchStage('result');
 
-    // Animate after the result screen is visible to ensure reliable ring fill.
     if (ringFill) {
       const radius = ringFill.r?.baseVal?.value || Number(ringFill.getAttribute('r')) || 52;
       const circumference = 2 * Math.PI * radius;
@@ -179,7 +169,6 @@ export class SwipeLearnApp {
       ringFill.style.strokeDasharray = `${circumference} ${circumference}`;
       ringFill.style.strokeDashoffset = `${circumference}`;
 
-      // Force layout so reset state is applied before animating to target.
       void ringFill.getBoundingClientRect();
 
       ringFill.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s';
@@ -222,16 +211,13 @@ export class SwipeLearnApp {
   }
 
   showEmpty() {
-    // Handle empty state if needed
   }
 
   switchStage(stageName) {
-    // Hide all screens
     document.querySelectorAll('.screen').forEach(screen => {
       screen.classList.remove('active', 'exit');
     });
 
-    // Show target screen
     const screen = getEl(`screen-${stageName}`);
     if (screen) {
       screen.classList.add('active');
@@ -241,12 +227,18 @@ export class SwipeLearnApp {
   }
 
   init() {
+    if (!localStorage.getItem(SESSION_KEY)) {
+      window.location.href = 'login.html';
+      return;
+    }
+
     this.switchStage('splash');
   }
 }
 
-// Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   const app = new SwipeLearnApp();
   app.init();
 });
+
+

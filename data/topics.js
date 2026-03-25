@@ -1,11 +1,5 @@
-/* ═══════════════════════════════════════════
-   SwipeLearn — topics.js
-   ═══════════════════════════════════════════
-   TOPICS & QUIZ DATA - CSE
-═══════════════════════════════════════════ */
-
 const TOPICS_DATA = {
-  /* WEB DEVELOPMENT TOPICS */
+  
   web: [
     {
       id: "html",
@@ -79,7 +73,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* MACHINE LEARNING TOPICS */
+  
   ml: [
     {
       id: "python",
@@ -139,7 +133,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* DATA STRUCTURES & ALGORITHMS */
+  
   dsa: [
     {
       id: "arrays",
@@ -199,7 +193,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* DATABASE MANAGEMENT SYSTEMS */
+  
   dbms: [
     {
       id: "sql",
@@ -231,7 +225,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* OPERATING SYSTEMS */
+  
   os: [
     {
       id: "processes",
@@ -263,7 +257,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* COMPUTER NETWORKS */
+  
   cn: [
     {
       id: "osi",
@@ -295,7 +289,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* CYBERSECURITY */
+  
   cybersec: [
     {
       id: "cryptography",
@@ -341,7 +335,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* CLOUD COMPUTING */
+  
   cloud: [
     {
       id: "aws",
@@ -387,7 +381,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* ARTIFICIAL INTELLIGENCE */
+  
   ai: [
     {
       id: "search",
@@ -419,7 +413,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* SOFTWARE ENGINEERING */
+  
   softeng: [
     {
       id: "sdlc",
@@ -451,7 +445,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* ECE DOMAINS */
+  
   signals: [
     {
       id: "ctft",
@@ -545,7 +539,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* EEE DOMAINS */
+  
   circuits: [
     {
       id: "networklaws",
@@ -639,7 +633,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* MECH DOMAINS */
+  
   thermo: [
     {
       id: "laws",
@@ -733,7 +727,7 @@ const TOPICS_DATA = {
     }
   ],
 
-  /* CIVIL DOMAINS */
+  
   structural: [
     {
       id: "som",
@@ -829,3 +823,5 @@ const TOPICS_DATA = {
 };
 
 export { TOPICS_DATA };
+
+

@@ -1,10 +1,3 @@
-/* ═══════════════════════════════════════════
-   SwipeLearn — css/layout.css
-   ═══════════════════════════════════════════
-   Layout, headers & screen structures
-═══════════════════════════════════════════ */
-
-/* Splash Screen */
 #screen-splash {
   justify-content: center;
 }
@@ -61,7 +54,6 @@
   backdrop-filter: blur(8px);
 }
 
-/* Card Screen */
 #screen-cards {
   justify-content: flex-start;
 }
@@ -145,7 +137,6 @@
   padding: 0 20px;
 }
 
-/* Quiz Screen */
 #screen-quiz {
   justify-content: flex-start;
   overflow-y: auto;
@@ -168,7 +159,6 @@
   flex: 1;
 }
 
-/* Result Screen */
 #screen-result {
   justify-content: center;
   overflow: hidden;
@@ -217,7 +207,6 @@
   justify-content: center;
 }
 
-/* Confetti canvas */
 #confetti-canvas {
   position: absolute;
   inset: 0;
@@ -227,7 +216,6 @@
   z-index: 1;
 }
 
-/* Empty state */
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -267,7 +255,6 @@
   background: var(--surface-hover);
 }
 
-/* Responsive */
 @media (max-width: 400px) {
   .splash-inner {
     padding: 15px;
@@ -280,3 +267,5 @@
     font-size: 20px;
   }
 }
+
+

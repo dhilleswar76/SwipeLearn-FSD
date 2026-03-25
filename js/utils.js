@@ -1,19 +1,7 @@
-/* ═══════════════════════════════════════════
-   SwipeLearn — js/utils.js
-   ═══════════════════════════════════════════
-   Utility helper functions
-═══════════════════════════════════════════ */
-
-/**
- * Get element by ID
- */
 export function getEl(id) {
   return document.getElementById(id);
 }
 
-/**
- * Create element with classes and attributes
- */
 export function createElement(tag, className = '', attributes = {}) {
   const el = document.createElement(tag);
   if (className) el.className = className;
@@ -21,30 +9,18 @@ export function createElement(tag, className = '', attributes = {}) {
   return el;
 }
 
-/**
- * Clamp value between min and max
- */
 export function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
-/**
- * Linear interpolation
- */
 export function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 
-/**
- * Get distance between two points
- */
 export function distance(x1, y1, x2, y2) {
   return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 }
 
-/**
- * Debounce function calls
- */
 export function debounce(func, delay) {
   let timeoutId;
   return function (...args) {
@@ -53,9 +29,6 @@ export function debounce(func, delay) {
   };
 }
 
-/**
- * Format breadcrumb path
- */
 export function formatBreadcrumb(branchName, domainName = '', topicName = '') {
   const parts = [branchName];
   if (domainName) parts.push('•');
@@ -70,9 +43,6 @@ export function formatBreadcrumb(branchName, domainName = '', topicName = '') {
   }).join('');
 }
 
-/**
- * Animate value from start to end
- */
 export function animateValue(start, end, duration, callback) {
   const startTime = Date.now();
   const animate = () => {
@@ -85,18 +55,12 @@ export function animateValue(start, end, duration, callback) {
   animate();
 }
 
-/**
- * Check if device is touch-enabled
- */
 export function isTouchDevice() {
   return (('ontouchstart' in window) ||
     (navigator.maxTouchPoints > 0) ||
     (navigator.msMaxTouchPoints > 0));
 }
 
-/**
- * Shuffle array
- */
 export function shuffle(array) {
   const result = [...array];
   for (let i = result.length - 1; i > 0; i--) {
@@ -106,31 +70,21 @@ export function shuffle(array) {
   return result;
 }
 
-/**
- * Get random item from array
- */
 export function randomItem(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-/**
- * Store data in localStorage
- */
 export function saveData(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-/**
- * Retrieve data from localStorage
- */
 export function loadData(key, defaultValue = null) {
   const data = localStorage.getItem(key);
   return data ? JSON.parse(data) : defaultValue;
 }
 
-/**
- * Clear localStorage
- */
 export function clearData(key) {
   localStorage.removeItem(key);
 }
+
+

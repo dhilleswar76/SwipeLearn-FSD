@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════
-   SwipeLearn — js/card-manager.js
-   ═══════════════════════════════════════════
-   Card navigation with arrow buttons
-═══════════════════════════════════════════ */
-
 import { getEl } from './utils.js';
 
 export class CardManager {
@@ -50,7 +44,6 @@ export class CardManager {
       <p class="card-desc">${card.desc}</p>
     `;
 
-    // Card click selects current item directly.
     div.addEventListener('click', () => this.selectCurrentCard());
     div.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
@@ -100,3 +93,5 @@ export class CardManager {
       .forEach(l => l.callback(data));
   }
 }
+
+

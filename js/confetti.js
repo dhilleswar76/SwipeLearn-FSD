@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════
-   SwipeLearn — js/confetti.js
-   ═══════════════════════════════════════════
-   Confetti canvas animation
-═══════════════════════════════════════════ */
-
 export class Confetti {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
@@ -52,13 +46,11 @@ export class Confetti {
       p.vy += 0.2; // gravity
       p.rotation += p.rotationSpeed;
 
-      // Remove particles that fall off screen
       if (p.y > this.canvas.height) {
         this.particles.splice(i, 1);
         continue;
       }
 
-      // Draw particle
       this.ctx.save();
       this.ctx.translate(p.x, p.y);
       this.ctx.rotate(p.rotation);
@@ -77,3 +69,5 @@ export class Confetti {
     this.animate();
   }
 }
+
+
