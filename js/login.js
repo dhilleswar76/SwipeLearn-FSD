@@ -13,7 +13,7 @@ const submitBtn = document.getElementById('btn-auth-submit');
 const toggleBtn = document.getElementById('btn-toggle-mode');
 
 let mode = 'login';
-const goHome = () => { window.location.href = 'index.html'; };
+const goHome = () => { window.location.href = '../index.html'; };
 
 function readUsers() {
   try {
