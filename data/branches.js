@@ -38,4 +38,3 @@ const BRANCHES_DATA = [
 
 export { BRANCHES_DATA };
 
-

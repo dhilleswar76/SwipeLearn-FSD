@@ -4,64 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SwipeLearn - Login</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="css/common.css" />
-  <link rel="stylesheet" href="css/animations.css" />
-  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body class="login-page">
   <div class="bg-orbs">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
   <div class="noise"></div>
-
   <main class="login-wrap">
     <section class="login-card">
       <div class="login-brand">
         <div class="login-logo">⚡</div>
         <h1>SwipeLearn</h1>
       </div>
-
       <h2 id="auth-title" class="auth-title">Welcome Back</h2>
       <p id="auth-subtitle" class="auth-subtitle">Log in to continue your learning journey.</p>
-
       <form id="auth-form" class="auth-form" autocomplete="off">
         <div id="name-group" class="field is-hidden">
           <label for="auth-name">Name</label>
           <input id="auth-name" type="text" placeholder="Your name" />
         </div>
-
         <div class="field">
           <label for="auth-email">Email</label>
           <input id="auth-email" type="email" placeholder="you@example.com" required />
         </div>
-
         <div class="field">
           <label for="auth-password">Password</label>
           <input id="auth-password" type="password" placeholder="At least 6 characters" required />
         </div>
-
         <p id="auth-message" class="auth-message"></p>
-
         <button id="btn-auth-submit" class="btn-primary auth-submit" type="submit">
           <span>Log In</span>
           <i class="fa-solid fa-right-to-bracket"></i>
         </button>
       </form>
-
       <button id="btn-toggle-mode" class="toggle-mode" type="button">Need an account? Sign up</button>
     </section>
   </main>
-
   <script type="module" src="js/login.js"></script>
 </body>
 </html>
-
 

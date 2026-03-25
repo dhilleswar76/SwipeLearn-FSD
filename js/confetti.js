@@ -43,7 +43,7 @@ export class Confetti {
 
       p.x += p.vx;
       p.y += p.vy;
-      p.vy += 0.2; // gravity
+      p.vy += 0.2;
       p.rotation += p.rotationSpeed;
 
       if (p.y > this.canvas.height) {

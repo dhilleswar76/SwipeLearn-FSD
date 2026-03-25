@@ -7,6 +7,7 @@ import { Confetti } from './confetti.js';
 import { getEl, formatBreadcrumb } from './utils.js';
 
 const SESSION_KEY = 'swipelearn-session';
+const SCREEN_FILES = ['splash', 'cards', 'quiz', 'result'];
 
 export class SwipeLearnApp {
   constructor() {
@@ -14,7 +15,7 @@ export class SwipeLearnApp {
     this.quizManager = null;
     this.confetti = new Confetti('confetti-canvas');
     this.state = {
-      currentStage: 'splash', // splash, branch, domain, topic, quiz, result
+      currentStage: 'splash',
       selectedBranch: null,
       selectedDomain: null,
       selectedTopic: null
@@ -24,24 +25,16 @@ export class SwipeLearnApp {
   }
 
   setupEventListeners() {
-    getEl('btn-start').addEventListener('click', () => this.startApp());
-
-    getEl('btn-back').addEventListener('click', () => this.goBack());
-    getEl('btn-quiz-back').addEventListener('click', () => this.goBack());
-
-    getEl('act-skip').addEventListener('click', () => {
-      if (this.cardManager) this.cardManager.previousCard();
-    });
-    getEl('act-pick').addEventListener('click', () => {
-      if (this.cardManager) this.cardManager.nextCard();
-    });
-
-    getEl('btn-next').addEventListener('click', () => {
-      if (this.quizManager) this.quizManager.nextQuestion();
-    });
-
-    getEl('btn-retry').addEventListener('click', () => this.retryQuiz());
-    getEl('btn-home').addEventListener('click', () => this.goHome());
+    const on = (id, fn) => getEl(id).addEventListener('click', fn);
+    on('btn-start', () => this.startApp());
+    on('btn-back', () => this.goBack());
+    on('btn-quiz-back', () => this.goBack());
+    on('act-skip', () => this.cardManager && this.cardManager.previousCard());
+    on('act-pick', () => this.cardManager && this.cardManager.nextCard());
+    on('btn-next', () => this.quizManager && this.quizManager.nextQuestion());
+    on('btn-retry', () => this.retryQuiz());
+    on('btn-home', () => this.goHome());
+    on('btn-logout', () => this.logout());
   }
 
   startApp() {
@@ -54,7 +47,6 @@ export class SwipeLearnApp {
       this.cardManager = new CardManager('branch');
       this.cardManager.setCards(BRANCHES_DATA);
       this.cardManager.on('pick', (branch) => this.selectBranch(branch));
-      this.cardManager.on('skip', () => {});
       this.cardManager.on('empty', () => this.showEmpty());
 
       getEl('stage-label').textContent = 'Choose Your Branch';
@@ -83,7 +75,6 @@ export class SwipeLearnApp {
       this.cardManager = new CardManager('domain');
       this.cardManager.setCards(domains);
       this.cardManager.on('pick', (domain) => this.selectDomain(domain));
-      this.cardManager.on('skip', () => {});
       this.cardManager.on('empty', () => this.showEmpty());
 
       getEl('stage-label').textContent = 'Choose Your Domain';
@@ -100,7 +91,6 @@ export class SwipeLearnApp {
       this.cardManager = new CardManager('topic');
       this.cardManager.setCards(topics);
       this.cardManager.on('pick', (topic) => this.startQuiz(topic));
-      this.cardManager.on('skip', () => {});
       this.cardManager.on('empty', () => this.showEmpty());
 
       getEl('stage-label').textContent = 'Choose Your Topic';
@@ -125,9 +115,7 @@ export class SwipeLearnApp {
   }
 
   showResult(result) {
-    const percentage = result.total > 0
-      ? Math.max(0, Math.min(100, Math.round((result.score / result.total) * 100)))
-      : 0;
+    const percentage = result.total ? Math.max(0, Math.min(100, Math.round((result.score / result.total) * 100))) : 0;
     const ringFill = getEl('ring-fill');
     const ringText = getEl('ring-text');
     const resultMsg = getEl('result-msg');
@@ -168,22 +156,16 @@ export class SwipeLearnApp {
       ringFill.style.transition = 'none';
       ringFill.style.strokeDasharray = `${circumference} ${circumference}`;
       ringFill.style.strokeDashoffset = `${circumference}`;
-
       void ringFill.getBoundingClientRect();
-
       ringFill.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s';
       ringFill.style.strokeDashoffset = `${offset}`;
     }
 
-    if (result.score >= 4) {
-      this.confetti.burst();
-    }
+    if (result.score >= 4) this.confetti.burst();
   }
 
   retryQuiz() {
-    if (this.state.selectedTopic) {
-      this.startQuiz(this.state.selectedTopic);
-    }
+    if (this.state.selectedTopic) this.startQuiz(this.state.selectedTopic);
   }
 
   goBack() {
@@ -210,18 +192,19 @@ export class SwipeLearnApp {
     this.switchStage('splash');
   }
 
+  logout() {
+    localStorage.removeItem(SESSION_KEY);
+    window.location.href = 'login.html';
+  }
+
   showEmpty() {
   }
 
   switchStage(stageName) {
-    document.querySelectorAll('.screen').forEach(screen => {
-      screen.classList.remove('active', 'exit');
-    });
+    document.querySelectorAll('.screen').forEach((screen) => screen.classList.remove('active', 'exit'));
 
     const screen = getEl(`screen-${stageName}`);
-    if (screen) {
-      screen.classList.add('active');
-    }
+    if (screen) screen.classList.add('active');
 
     this.state.currentStage = stageName;
   }
@@ -237,8 +220,27 @@ export class SwipeLearnApp {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new SwipeLearnApp();
-  app.init();
+  const appRoot = getEl('app');
+
+  const initApp = async () => {
+    try {
+      const chunks = await Promise.all(
+        SCREEN_FILES.map(async (name) => {
+          const res = await fetch(`html/${name}.html`);
+          if (!res.ok) throw new Error(`Failed to load ${name}.html`);
+          return res.text();
+        })
+      );
+      appRoot.innerHTML = chunks.join('');
+
+      const app = new SwipeLearnApp();
+      app.init();
+    } catch (error) {
+      console.error('Error loading app screens:', error);
+    }
+  };
+
+  initApp();
 });
 
 

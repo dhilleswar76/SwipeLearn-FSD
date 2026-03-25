@@ -1,4 +1,4 @@
-import { getEl, shuffle } from './utils.js';
+import { getEl } from './utils.js';
 
 export class QuizManager {
   constructor() {
@@ -48,8 +48,7 @@ export class QuizManager {
 
     qEl.textContent = q.q;
 
-    const progress = ((this.currentQuestion + 1) / this.totalQuestions) * 100;
-    progressBar.style.width = progress + '%';
+    progressBar.style.width = `${((this.currentQuestion + 1) / this.totalQuestions) * 100}%`;
     qNum.textContent = `${this.currentQuestion + 1} / ${this.totalQuestions}`;
     if (scoreText) scoreText.textContent = String(this.score);
 
@@ -98,7 +97,7 @@ export class QuizManager {
       options[q.ans].classList.add('correct');
     }
 
-    options.forEach((opt, idx) => {
+    options.forEach((opt) => {
       opt.classList.add('disabled');
     });
 

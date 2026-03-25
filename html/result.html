@@ -1,0 +1,30 @@
+<section id="screen-result" class="screen">
+  <div class="result-inner">
+    <div class="result-trophy" id="result-trophy">🏆</div>
+    <h2 class="result-title" id="result-title">Quiz Complete!</h2>
+    <div class="result-score-ring" id="result-score-ring">
+      <svg viewBox="0 0 120 120">
+        <defs>
+          <linearGradient id="ringGradLocal" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7c5cfc" stop-opacity="1" />
+            <stop offset="50%" stop-color="#fc5ca0" stop-opacity="1" />
+            <stop offset="100%" stop-color="#5cf0fc" stop-opacity="1" />
+          </linearGradient>
+        </defs>
+        <circle cx="60" cy="60" r="52" class="ring-track"/>
+        <circle cx="60" cy="60" r="52" class="ring-fill" id="ring-fill"/>
+      </svg>
+      <div class="ring-text" id="ring-text">0/5</div>
+    </div>
+    <p class="result-msg" id="result-msg"></p>
+    <div class="result-actions">
+      <button class="btn-primary" id="btn-retry">
+        <i class="fa-solid fa-rotate-right"></i> Retry Quiz
+      </button>
+      <button class="btn-secondary" id="btn-home">
+        <i class="fa-solid fa-house"></i> Home
+      </button>
+    </div>
+  </div>
+  <canvas id="confetti-canvas"></canvas>
+</section>

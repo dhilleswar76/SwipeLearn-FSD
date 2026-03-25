@@ -13,6 +13,7 @@ const submitBtn = document.getElementById('btn-auth-submit');
 const toggleBtn = document.getElementById('btn-toggle-mode');
 
 let mode = 'login';
+const goHome = () => { window.location.href = 'index.html'; };
 
 function readUsers() {
   try {
@@ -99,9 +100,7 @@ function signup(name, email, password) {
   writeUsers(users);
   createSession(newUser);
   setMessage('Account created. Redirecting...', 'success');
-  setTimeout(() => {
-    window.location.href = 'index.html';
-  }, 400);
+  setTimeout(goHome, 400);
 }
 
 function login(email, password) {
@@ -116,13 +115,11 @@ function login(email, password) {
 
   createSession(user);
   setMessage('Login successful. Redirecting...', 'success');
-  setTimeout(() => {
-    window.location.href = 'index.html';
-  }, 300);
+  setTimeout(goHome, 300);
 }
 
 if (localStorage.getItem(SESSION_KEY)) {
-  window.location.href = 'index.html';
+  goHome();
 }
 
 toggleBtn.addEventListener('click', () => {

@@ -176,4 +176,3 @@ const DOMAINS_DATA = {
 
 export { DOMAINS_DATA };
 
-

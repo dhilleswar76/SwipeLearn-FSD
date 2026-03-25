@@ -1,0 +1,3299 @@
+FILE: index.html
+================================================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SwipeLearn — LMS</title>
+  
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+  
+  
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/quiz.css" />
+</head>
+<body>
+
+  
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  
+  <div class="noise"></div>
+
+  
+  <div id="app">
+
+    
+    <section id="screen-splash" class="screen active">
+      <div class="splash-inner">
+        <div class="logo-mark">
+          <span class="logo-icon">⚡</span>
+        </div>
+        <h1 class="splash-title">SwipeLearn</h1>
+        <p class="splash-sub">Pick your path in seconds.<br/>Browse with arrows and click a card to select.</p>
+        <button id="btn-start" class="btn-primary">
+          <span>Start Learning</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <p class="splash-hint">Click card to select · Use arrows to move previous/next</p>
+      </div>
+    </section>
+
+    
+    <section id="screen-cards" class="screen">
+      
+      <header class="app-header">
+        <button id="btn-back" class="btn-back is-hidden" title="Go back" aria-label="Go back">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="breadcrumb" id="breadcrumb"></div>
+        <div class="header-spacer"></div>
+      </header>
+
+      
+      <div class="stage-label" id="stage-label">Choose Your Branch</div>
+
+      
+      <div class="card-arena" id="card-arena">
+        <div class="card-stack" id="card-stack"></div>
+      </div>
+
+      
+      <div class="action-bar">
+        <button class="act-btn act-skip" id="act-skip" title="Previous Card">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="card-counter" id="card-counter">1 / 1</div>
+        <button class="act-btn act-pick" id="act-pick" title="Next Card">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+
+    
+    <section id="screen-quiz" class="screen">
+      <header class="app-header">
+        <button id="btn-quiz-back" class="btn-back" title="Go back" aria-label="Go back">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="quiz-topic-label" id="quiz-topic-label"></div>
+        <div class="header-spacer"></div>
+      </header>
+
+      <div class="quiz-wrap">
+        
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-track">
+            <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+          </div>
+          <div class="quiz-q-num" id="quiz-q-num">1 / 5</div>
+        </div>
+
+        
+        <div class="quiz-score-badge" id="quiz-score-badge">
+          <i class="fa-solid fa-star"></i>
+          <span id="quiz-score-text">0</span>
+        </div>
+
+        
+        <div class="quiz-card" id="quiz-card">
+          <div class="quiz-question" id="quiz-question">Loading...</div>
+          <div class="quiz-options" id="quiz-options"></div>
+        </div>
+
+        
+        <button class="btn-next is-hidden" id="btn-next">
+          Next <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+
+    
+    <section id="screen-result" class="screen">
+      <div class="result-inner">
+        <div class="result-trophy" id="result-trophy">🏆</div>
+        <h2 class="result-title" id="result-title">Quiz Complete!</h2>
+        <div class="result-score-ring" id="result-score-ring">
+          <svg viewBox="0 0 120 120">
+            <defs>
+              <linearGradient id="ringGradLocal" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#7c5cfc" stop-opacity="1" />
+                <stop offset="50%" stop-color="#fc5ca0" stop-opacity="1" />
+                <stop offset="100%" stop-color="#5cf0fc" stop-opacity="1" />
+              </linearGradient>
+            </defs>
+            <circle cx="60" cy="60" r="52" class="ring-track"/>
+            <circle cx="60" cy="60" r="52" class="ring-fill" id="ring-fill"/>
+          </svg>
+          <div class="ring-text" id="ring-text">0/5</div>
+        </div>
+        <p class="result-msg" id="result-msg"></p>
+        <div class="result-actions">
+          <button class="btn-primary" id="btn-retry">
+            <i class="fa-solid fa-rotate-right"></i> Retry Quiz
+          </button>
+          <button class="btn-secondary" id="btn-home">
+            <i class="fa-solid fa-house"></i> Home
+          </button>
+        </div>
+      </div>
+      
+      <canvas id="confetti-canvas"></canvas>
+    </section>
+
+  </div>
+
+  
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
+
+
+
+
+FILE: login.html
+================================================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SwipeLearn - Login</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="noise"></div>
+
+  <main class="login-wrap">
+    <section class="login-card">
+      <div class="login-brand">
+        <div class="login-logo">⚡</div>
+        <h1>SwipeLearn</h1>
+      </div>
+
+      <h2 id="auth-title" class="auth-title">Welcome Back</h2>
+      <p id="auth-subtitle" class="auth-subtitle">Log in to continue your learning journey.</p>
+
+      <form id="auth-form" class="auth-form" autocomplete="off">
+        <div id="name-group" class="field is-hidden">
+          <label for="auth-name">Name</label>
+          <input id="auth-name" type="text" placeholder="Your name" />
+        </div>
+
+        <div class="field">
+          <label for="auth-email">Email</label>
+          <input id="auth-email" type="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="field">
+          <label for="auth-password">Password</label>
+          <input id="auth-password" type="password" placeholder="At least 6 characters" required />
+        </div>
+
+        <p id="auth-message" class="auth-message"></p>
+
+        <button id="btn-auth-submit" class="btn-primary auth-submit" type="submit">
+          <span>Log In</span>
+          <i class="fa-solid fa-right-to-bracket"></i>
+        </button>
+      </form>
+
+      <button id="btn-toggle-mode" class="toggle-mode" type="button">Need an account? Sign up</button>
+    </section>
+  </main>
+
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>
+
+
+
+
+FILE: css/animations.css
+================================================================================
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulseLogo {
+  0%, 100% {
+    box-shadow: 0 0 40px rgba(124, 92, 252, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 70px rgba(124, 92, 252, 0.8);
+  }
+}
+
+@keyframes drift1 {
+  to {
+    transform: translate(80px, 100px);
+  }
+}
+
+@keyframes drift2 {
+  to {
+    transform: translate(-60px, -80px);
+  }
+}
+
+@keyframes drift3 {
+  to {
+    transform: translate(-50%, -55%) scale(1.2);
+  }
+}
+
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes trophyBounce {
+  from {
+    transform: scale(0) rotate(-20deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes swipeOut {
+  to {
+    opacity: 0;
+    transform: translateX(150px) rotate(20deg);
+  }
+}
+
+@keyframes cardPulse {
+  0%, 100% {
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+  50% {
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.15);
+  }
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(20px);
+}
+
+.screen.active {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.screen.exit {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+
+
+
+FILE: css/cards.css
+================================================================================
+.card-arena {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.card-stack {
+  position: relative;
+  width: 340px;
+  height: 420px;
+}
+
+.swipe-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--card-radius);
+  background: rgba(255, 255, 255, 0.07);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 32px 28px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.swipe-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+.swipe-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  border-radius: 50%;
+}
+
+.card-icon-wrap {
+  width: 90px;
+  height: 90px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 46px;
+  transition: transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-icon-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+}
+
+.card-icon-wrap i {
+  font-size: 44px;
+}
+
+.card-icon-wrap .devicon {
+  font-size: 50px;
+}
+
+.card-title {
+  font-family: var(--font-head);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+  max-width: 240px;
+}
+
+.card-tag {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-head);
+  background: rgba(124, 92, 252, 0.2);
+  border: 1px solid rgba(124, 92, 252, 0.3);
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.swipe-card[data-stage="branch"] .card-tag {
+  background: rgba(124, 92, 252, 0.18);
+  border-color: rgba(124, 92, 252, 0.35);
+  color: #a78bfa;
+}
+
+.swipe-card[data-stage="domain"] .card-tag {
+  background: rgba(92, 240, 252, 0.15);
+  border-color: rgba(92, 240, 252, 0.3);
+  color: var(--accent3);
+}
+
+.swipe-card[data-stage="topic"] .card-tag {
+  background: rgba(61, 252, 176, 0.15);
+  border-color: rgba(61, 252, 176, 0.3);
+  color: var(--yes);
+}
+
+.action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 16px 20px 28px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.act-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 2px solid;
+  background: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.act-skip {
+  border-color: rgba(92, 240, 252, 0.4);
+  color: var(--accent3);
+  box-shadow: 0 4px 20px rgba(92, 240, 252, 0.15);
+}
+
+.act-pick {
+  border-color: rgba(92, 240, 252, 0.4);
+  color: var(--accent3);
+  box-shadow: 0 4px 20px rgba(92, 240, 252, 0.15);
+}
+
+.act-btn:hover {
+  transform: scale(1.08);
+}
+
+.act-btn:active {
+  transform: scale(0.95);
+}
+
+.card-counter {
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 56px;
+  text-align: center;
+}
+
+.card-meta {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-head);
+  color: var(--text-muted);
+  letter-spacing: 0.4px;
+}
+
+@media (max-width: 400px) {
+  .card-stack {
+    width: 300px;
+    height: 380px;
+  }
+
+  .action-bar {
+    gap: 12px;
+  }
+
+  .act-btn {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-height: 700px) {
+  .card-stack {
+    height: 340px;
+  }
+}
+
+
+
+
+FILE: css/common.css
+================================================================================
+:root {
+  --bg: #0a0a12;
+  --surface: rgba(255,255,255,0.06);
+  --surface-hover: rgba(255,255,255,0.10);
+  --border: rgba(255,255,255,0.12);
+  --text: #f0eeff;
+  --text-muted: rgba(240,238,255,0.5);
+  --accent: #7c5cfc;
+  --accent2: #fc5ca0;
+  --accent3: #5cf0fc;
+  --yes: #3dfcb0;
+  --no: #fc5c5c;
+  --card-radius: 24px;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --shadow-card: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+  --shadow-glow: 0 0 60px rgba(124,92,252,0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+}
+
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+}
+
+.orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #7c5cfc, transparent 70%);
+  top: -200px;
+  left: -150px;
+}
+
+.orb-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #fc5ca0, transparent 70%);
+  bottom: -150px;
+  right: -100px;
+}
+
+.orb-3 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #5cf0fc, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#app {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border: none;
+  border-radius: 100px;
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 40px rgba(124,92,252,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 50px rgba(124,92,252,0.6);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text);
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.2s, transform 0.2s;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-hover);
+  transform: translateY(-1px);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+
+
+
+FILE: css/layout.css
+================================================================================
+#screen-splash {
+  justify-content: center;
+}
+
+.splash-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  padding: 20px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.logo-mark {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  box-shadow: 0 0 40px rgba(124, 92, 252, 0.5);
+  animation: pulseLogo 3s ease-in-out infinite;
+}
+
+.splash-title {
+  font-family: var(--font-head);
+  font-size: clamp(42px, 10vw, 72px);
+  font-weight: 800;
+  letter-spacing: -2px;
+  background: linear-gradient(135deg, #fff 30%, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.splash-sub {
+  font-size: clamp(14px, 3vw, 18px);
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 380px;
+}
+
+.splash-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 8px 18px;
+  border-radius: 100px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+#screen-cards {
+  justify-content: flex-start;
+}
+
+.app-header {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  padding: 18px 20px 0;
+  gap: 12px;
+}
+
+.btn-back {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  flex-shrink: 0;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.btn-back:hover {
+  background: var(--surface-hover);
+  transform: scale(1.05);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: var(--font-head);
+  font-weight: 600;
+  flex: 1;
+  overflow: hidden;
+}
+
+.breadcrumb span {
+  opacity: 0.6;
+}
+
+.breadcrumb b {
+  color: var(--text);
+  font-weight: 700;
+  opacity: 1;
+}
+
+.breadcrumb .bc-sep {
+  color: var(--accent);
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.header-spacer {
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.stage-label {
+  font-family: var(--font-head);
+  font-size: clamp(20px, 5vw, 28px);
+  font-weight: 800;
+  text-align: center;
+  margin-top: 20px;
+  letter-spacing: -0.5px;
+  padding: 0 20px;
+}
+
+#screen-quiz {
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+
+.quiz-topic-label {
+  font-family: var(--font-head);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.quiz-wrap {
+  width: 100%;
+  max-width: 520px;
+  padding: 16px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+#screen-result {
+  justify-content: center;
+  overflow: hidden;
+}
+
+.result-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+  padding: 30px 20px;
+  z-index: 2;
+  position: relative;
+  animation: fadeUp 0.6s ease both;
+}
+
+.result-trophy {
+  font-size: 64px;
+  animation: trophyBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.result-title {
+  font-family: var(--font-head);
+  font-size: clamp(28px, 7vw, 42px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #fff 30%, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.result-msg {
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 300px;
+  line-height: 1.7;
+}
+
+.result-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#confetti-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 15px;
+  animation: fadeUp 0.4s ease both;
+}
+
+.empty-state .empty-icon {
+  font-size: 48px;
+}
+
+.empty-state p {
+  max-width: 260px;
+  line-height: 1.6;
+}
+
+.empty-state button {
+  margin-top: 6px;
+  padding: 12px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text);
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.empty-state button:hover {
+  background: var(--surface-hover);
+}
+
+@media (max-width: 400px) {
+  .splash-inner {
+    padding: 15px;
+  }
+}
+
+@media (max-height: 700px) {
+  .stage-label {
+    margin-top: 8px;
+    font-size: 20px;
+  }
+}
+
+
+
+
+FILE: css/login.css
+================================================================================
+body {
+  overflow: auto;
+}
+
+.login-wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 460px;
+  border-radius: 28px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  backdrop-filter: blur(18px) saturate(1.3);
+  box-shadow: var(--shadow-card);
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: fadeUp 0.7s ease both;
+}
+
+.login-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.login-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 36px rgba(124, 92, 252, 0.45);
+}
+
+.login-brand h1 {
+  font-family: var(--font-head);
+  font-size: 30px;
+  letter-spacing: -0.8px;
+}
+
+.auth-title {
+  font-family: var(--font-head);
+  font-size: clamp(24px, 6vw, 34px);
+  letter-spacing: -0.5px;
+  margin-top: 8px;
+}
+
+.auth-subtitle {
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.auth-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.field input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-size: 15px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus {
+  border-color: rgba(124, 92, 252, 0.65);
+  box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.2);
+}
+
+.auth-message {
+  min-height: 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.auth-message.error {
+  color: #ff8fae;
+}
+
+.auth-message.success {
+  color: var(--yes);
+}
+
+.auth-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.toggle-mode {
+  border: none;
+  background: transparent;
+  color: var(--accent3);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.toggle-mode:hover {
+  color: #8bf5ff;
+}
+
+@media (max-width: 460px) {
+  .login-card {
+    padding: 22px 16px;
+    border-radius: 22px;
+  }
+
+  .login-brand h1 {
+    font-size: 28px;
+  }
+}
+
+
+
+
+FILE: css/quiz.css
+================================================================================
+.quiz-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quiz-progress-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.quiz-progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 3px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quiz-q-num {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.quiz-score-badge {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: rgba(255, 200, 0, 0.1);
+  border: 1px solid rgba(255, 200, 0, 0.25);
+  border-radius: 100px;
+  color: #ffc800;
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.quiz-score-badge i {
+  font-size: 14px;
+}
+
+.quiz-card {
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 28px 24px 32px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: cardSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.quiz-question {
+  font-family: var(--font-head);
+  font-size: clamp(17px, 4vw, 21px);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.3px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-option {
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quiz-option:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(4px);
+}
+
+.opt-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 800;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.quiz-option.correct {
+  background: rgba(61, 252, 176, 0.12);
+  border-color: rgba(61, 252, 176, 0.5);
+  color: var(--yes);
+}
+
+.quiz-option.correct .opt-letter {
+  background: rgba(61, 252, 176, 0.2);
+  border-color: var(--yes);
+  color: var(--yes);
+}
+
+.quiz-option.wrong {
+  background: rgba(252, 92, 92, 0.12);
+  border-color: rgba(252, 92, 92, 0.5);
+  color: var(--no);
+}
+
+.quiz-option.wrong .opt-letter {
+  background: rgba(252, 92, 92, 0.2);
+  border-color: var(--no);
+  color: var(--no);
+}
+
+.quiz-option.disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.btn-next {
+  padding: 15px 36px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border: none;
+  border-radius: 100px;
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-self: center;
+  box-shadow: 0 6px 30px rgba(124, 92, 252, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.3s ease both;
+}
+
+.btn-next:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 40px rgba(124, 92, 252, 0.55);
+}
+
+.result-score-ring {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.result-score-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 8;
+}
+
+.ring-fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke: url(#ringGradLocal);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 327;
+  stroke-dashoffset: 327;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+.ring-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-head);
+  font-size: 26px;
+  font-weight: 800;
+}
+
+@media (max-height: 700px) {
+  .quiz-wrap {
+    padding: 12px 20px 30px;
+    gap: 16px;
+  }
+
+  .quiz-card {
+    padding: 20px 18px 24px;
+    gap: 18px;
+  }
+}
+
+
+
+
+FILE: data/branches.js
+================================================================================
+const BRANCHES_DATA = [
+  {
+    id: "cse",
+    label: "CSE",
+    icon: "💻",
+    desc: "Computer Science & Engineering",
+    color: "#7c5cfc"
+  },
+  {
+    id: "ece",
+    label: "ECE",
+    icon: "📡",
+    desc: "Electronics & Communication Engineering",
+    color: "#5cf0fc"
+  },
+  {
+    id: "eee",
+    label: "EEE",
+    icon: "⚡",
+    desc: "Electrical & Electronics Engineering",
+    color: "#ffc800"
+  },
+  {
+    id: "mech",
+    label: "MECH",
+    icon: "⚙️",
+    desc: "Mechanical Engineering",
+    color: "#f97316"
+  },
+  {
+    id: "civil",
+    label: "CIVIL",
+    icon: "🏗️",
+    desc: "Civil Engineering",
+    color: "#84cc16"
+  }
+];
+
+export { BRANCHES_DATA };
+
+
+
+
+FILE: data/domains.js
+================================================================================
+const DOMAINS_DATA = {
+  
+  cse: [
+    {
+      id: "web",
+      label: "Web Dev",
+      icon: "🌐",
+      desc: "Frontend, backend & full-stack",
+      color: "#5cf0fc"
+    },
+    {
+      id: "ml",
+      label: "Machine Learning",
+      icon: "🤖",
+      desc: "AI, models & data science",
+      color: "#fc5ca0"
+    },
+    {
+      id: "dsa",
+      label: "DSA",
+      icon: "🧠",
+      desc: "Data Structures & Algorithms",
+      color: "#3dfcb0"
+    },
+    {
+      id: "dbms",
+      label: "DBMS",
+      icon: "🗄️",
+      desc: "Database Management Systems",
+      color: "#fb923c"
+    },
+    {
+      id: "os",
+      label: "Operating Systems",
+      icon: "🖥️",
+      desc: "OS concepts & process management",
+      color: "#94a3b8"
+    },
+    {
+      id: "cn",
+      label: "Computer Networks",
+      icon: "🌍",
+      desc: "Protocols, OSI model & networking",
+      color: "#22d3ee"
+    },
+    {
+      id: "cybersec",
+      label: "Cybersecurity",
+      icon: "🔐",
+      desc: "Network security, cryptography & ethical hacking",
+      color: "#f43f5e"
+    },
+    {
+      id: "cloud",
+      label: "Cloud Computing",
+      icon: "☁️",
+      desc: "AWS, Azure, GCP & cloud architecture",
+      color: "#38bdf8"
+    },
+    {
+      id: "ai",
+      label: "Artificial Intelligence",
+      icon: "🧠",
+      desc: "Search, planning, knowledge & reasoning",
+      color: "#c084fc"
+    },
+    {
+      id: "softeng",
+      label: "Software Eng.",
+      icon: "📐",
+      desc: "SDLC, design patterns & agile",
+      color: "#34d399"
+    }
+  ],
+
+  
+  ece: [
+    {
+      id: "signals",
+      label: "Signals & Systems",
+      icon: "〰️",
+      desc: "Signal processing fundamentals",
+      color: "#fc5ca0"
+    },
+    {
+      id: "vlsi",
+      label: "VLSI Design",
+      icon: "🔬",
+      desc: "Very large-scale integration",
+      color: "#a78bfa"
+    },
+    {
+      id: "comm",
+      label: "Communication",
+      icon: "📶",
+      desc: "Wireless & wired communication",
+      color: "#34d399"
+    }
+  ],
+
+  
+  eee: [
+    {
+      id: "circuits",
+      label: "Circuit Theory",
+      icon: "🔌",
+      desc: "DC/AC circuit analysis",
+      color: "#ffc800"
+    },
+    {
+      id: "machines",
+      label: "Electrical Machines",
+      icon: "🏭",
+      desc: "Motors, generators & transformers",
+      color: "#f87171"
+    },
+    {
+      id: "power",
+      label: "Power Systems",
+      icon: "🏗️",
+      desc: "Generation, transmission & distribution",
+      color: "#86efac"
+    }
+  ],
+
+  
+  mech: [
+    {
+      id: "thermo",
+      label: "Thermodynamics",
+      icon: "🌡️",
+      desc: "Heat, energy & thermodynamic laws",
+      color: "#ef4444"
+    },
+    {
+      id: "fluid",
+      label: "Fluid Mechanics",
+      icon: "💧",
+      desc: "Flow, pressure & viscosity",
+      color: "#38bdf8"
+    },
+    {
+      id: "manufacturing",
+      label: "Manufacturing",
+      icon: "🏭",
+      desc: "Machining, casting & processes",
+      color: "#a3e635"
+    }
+  ],
+
+  
+  civil: [
+    {
+      id: "structural",
+      label: "Structural Eng.",
+      icon: "🏛️",
+      desc: "Beams, columns & structural analysis",
+      color: "#84cc16"
+    },
+    {
+      id: "geotech",
+      label: "Geotechnical Eng.",
+      icon: "🌍",
+      desc: "Soil mechanics & foundations",
+      color: "#b45309"
+    },
+    {
+      id: "transport",
+      label: "Transportation Eng.",
+      icon: "🚗",
+      desc: "Roads, highways & traffic",
+      color: "#22c55e"
+    }
+  ]
+};
+
+export { DOMAINS_DATA };
+
+
+
+
+FILE: data/topics.js
+================================================================================
+const TOPICS_DATA = {
+  
+  web: [
+    {
+      id: "html",
+      label: "HTML",
+      iconClass: "devicon-html5-plain colored",
+      desc: "Structure of the web",
+      color: "#e34c26",
+      quiz: [
+        { q: "What does HTML stand for?", opts: ["HyperText Markup Language", "HighText Machine Language", "HyperText Machine Language", "HyperLink Text Markup Language"], ans: 0 },
+        { q: "Which tag creates a hyperlink?", opts: ["<link>", "<a>", "<href>", "<nav>"], ans: 1 },
+        { q: "Which element is the root of an HTML document?", opts: ["<head>", "<body>", "<html>", "<root>"], ans: 2 },
+        { q: "Which HTML5 element defines navigation links?", opts: ["<navigation>", "<menu>", "<nav>", "<links>"], ans: 2 },
+        { q: "What does the <canvas> tag do?", opts: ["Displays images", "Draws graphics via scripting", "Creates 3D scenes", "Embeds videos"], ans: 1 }
+      ]
+    },
+    {
+      id: "css",
+      label: "CSS",
+      iconClass: "devicon-css3-plain colored",
+      desc: "Style, layout & animations",
+      color: "#264de4",
+      quiz: [
+        { q: "What does CSS stand for?", opts: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style Sheets", "Colorful Style Sheets"], ans: 1 },
+        { q: "Which property changes text color?", opts: ["font-color", "text-color", "color", "foreground"], ans: 2 },
+        { q: "How do you center a block element horizontally?", opts: ["text-align:center", "margin:auto", "align:center", "float:center"], ans: 1 },
+        { q: "Which unit is relative to the viewport width?", opts: ["px", "em", "vw", "rem"], ans: 2 },
+        { q: "Which CSS property creates space inside an element?", opts: ["margin", "spacing", "padding", "gap"], ans: 2 }
+      ]
+    },
+    {
+      id: "js",
+      label: "JavaScript",
+      iconClass: "devicon-javascript-plain colored",
+      desc: "Dynamic & interactive web",
+      color: "#f7df1e",
+      quiz: [
+        { q: "Which keyword declares a block-scoped variable?", opts: ["var", "local", "let", "define"], ans: 2 },
+        { q: "What does typeof null return?", opts: ["'null'", "'undefined'", "'object'", "'boolean'"], ans: 2 },
+        { q: "Which method adds an element to the end of an array?", opts: ["append()", "push()", "insert()", "add()"], ans: 1 },
+        { q: "What does === check?", opts: ["Value only", "Type only", "Value and type", "Neither"], ans: 2 },
+        { q: "Which method removes the last element of an array?", opts: ["shift()", "pop()", "splice()", "delete()"], ans: 1 }
+      ]
+    },
+    {
+      id: "react",
+      label: "React",
+      iconClass: "devicon-react-original colored",
+      desc: "Component-based UI library",
+      color: "#61dafb",
+      quiz: [
+        { q: "React is maintained by?", opts: ["Google", "Microsoft", "Meta (Facebook)", "Amazon"], ans: 2 },
+        { q: "Which hook manages component state?", opts: ["useEffect", "useState", "useRef", "useContext"], ans: 1 },
+        { q: "What is JSX?", opts: ["A CSS preprocessor", "A JS syntax extension", "A backend framework", "A DB query language"], ans: 1 },
+        { q: "What is the virtual DOM?", opts: ["A browser feature", "A lightweight copy of the real DOM", "A CSS file", "A JS engine"], ans: 1 },
+        { q: "Which hook handles side effects?", opts: ["useState", "useMemo", "useEffect", "useReducer"], ans: 2 }
+      ]
+    },
+    {
+      id: "nodejs",
+      label: "Node.js",
+      iconClass: "devicon-nodejs-plain colored",
+      desc: "Server-side JavaScript runtime",
+      color: "#68a063",
+      quiz: [
+        { q: "Node.js uses which engine?", opts: ["SpiderMonkey", "V8", "JavaScriptCore", "Chakra"], ans: 1 },
+        { q: "Which module handles file system in Node?", opts: ["http", "path", "fs", "os"], ans: 2 },
+        { q: "npm stands for?", opts: ["Node Package Manager", "New Project Manager", "Node Program Module", "None"], ans: 0 },
+        { q: "Which method starts an HTTP server?", opts: ["server.start()", "server.listen()", "server.run()", "server.open()"], ans: 1 },
+        { q: "Node.js is best described as?", opts: ["Multi-threaded", "Event-driven & non-blocking", "Synchronous only", "Browser-based"], ans: 1 }
+      ]
+    }
+  ],
+
+  
+  ml: [
+    {
+      id: "python",
+      label: "Python",
+      iconClass: "devicon-python-plain colored",
+      desc: "Core language for ML & data",
+      color: "#3572a5",
+      quiz: [
+        { q: "Which library is essential for numerical computing?", opts: ["pandas", "matplotlib", "NumPy", "seaborn"], ans: 2 },
+        { q: "What does len([1,2,3]) return?", opts: ["2", "3", "4", "0"], ans: 1 },
+        { q: "Which keyword defines a function?", opts: ["function", "fn", "def", "define"], ans: 2 },
+        { q: "What is a Python dict?", opts: ["An ordered list", "A key-value store", "A tuple", "A set"], ans: 1 },
+        { q: "Which operator is used for floor division?", opts: ["/", "%", "//", "**"], ans: 2 }
+      ]
+    },
+    {
+      id: "tensorflow",
+      label: "TensorFlow",
+      iconClass: "devicon-tensorflow-original colored",
+      desc: "Deep learning framework",
+      color: "#ff6f00",
+      quiz: [
+        { q: "TensorFlow was developed by?", opts: ["Facebook", "Google Brain", "OpenAI", "DeepMind"], ans: 1 },
+        { q: "What is a tensor?", opts: ["A function", "A multi-dimensional array", "A neuron", "A loss function"], ans: 1 },
+        { q: "Which API simplifies model building in TF?", opts: ["NumPy", "Pandas", "Keras", "Scikit-learn"], ans: 2 },
+        { q: "What does model.fit() do?", opts: ["Evaluates model", "Trains model", "Predicts output", "Compiles model"], ans: 1 },
+        { q: "What is backpropagation?", opts: ["Forward pass", "Algorithm to update weights", "Data preprocessing", "Activation function"], ans: 1 }
+      ]
+    },
+    {
+      id: "nlp",
+      label: "NLP",
+      icon: "🗣️",
+      desc: "Natural Language Processing",
+      color: "#a78bfa",
+      quiz: [
+        { q: "NLP stands for?", opts: ["Neural Learning Process", "Natural Language Processing", "Numeric Logic Programming", "None"], ans: 1 },
+        { q: "Tokenization means?", opts: ["Encrypting text", "Splitting text into tokens", "Translating text", "Summarizing text"], ans: 1 },
+        { q: "Which model architecture transformed NLP in 2017?", opts: ["RNN", "CNN", "Transformer", "LSTM"], ans: 2 },
+        { q: "BERT was introduced by?", opts: ["OpenAI", "Google", "Meta", "Microsoft"], ans: 1 },
+        { q: "Stemming reduces words to?", opts: ["Full sentences", "Root form", "Synonyms", "Acronyms"], ans: 1 }
+      ]
+    },
+    {
+      id: "cv",
+      label: "Computer Vision",
+      icon: "👁️",
+      desc: "Image recognition & processing",
+      color: "#f472b6",
+      quiz: [
+        { q: "CNN stands for?", opts: ["Central Neural Node", "Convolutional Neural Network", "Computed Numeric Net", "None"], ans: 1 },
+        { q: "Which layer extracts features in CNN?", opts: ["Dense layer", "Dropout layer", "Convolutional layer", "Pooling layer"], ans: 2 },
+        { q: "Max pooling does what?", opts: ["Averages values", "Takes maximum in a window", "Normalizes values", "Flattens tensors"], ans: 1 },
+        { q: "YOLO is used for?", opts: ["Speech recognition", "Real-time object detection", "Image segmentation", "Face generation"], ans: 1 },
+        { q: "Which dataset is famous for image classification benchmarks?", opts: ["MNIST", "COCO", "ImageNet", "CIFAR-10"], ans: 2 }
+      ]
+    }
+  ],
+
+  
+  dsa: [
+    {
+      id: "arrays",
+      label: "Arrays",
+      icon: "📊",
+      desc: "Linear data structures",
+      color: "#3dfcb0",
+      quiz: [
+        { q: "Time complexity of accessing element by index?", opts: ["O(n)", "O(log n)", "O(1)", "O(n²)"], ans: 2 },
+        { q: "Which sort has average O(n log n)?", opts: ["Bubble Sort", "Insertion Sort", "Merge Sort", "Selection Sort"], ans: 2 },
+        { q: "Worst-case time for linear search?", opts: ["O(1)", "O(log n)", "O(n)", "O(n²)"], ans: 2 },
+        { q: "Two-pointer approach works best for?", opts: ["Trees", "Graphs", "Sorted arrays", "Stacks"], ans: 2 },
+        { q: "Prefix sums solve?", opts: ["Sorting problems", "Range sum queries", "Graph traversal", "DP only"], ans: 1 }
+      ]
+    },
+    {
+      id: "trees",
+      label: "Trees",
+      icon: "🌳",
+      desc: "Hierarchical data structures",
+      color: "#7c5cfc",
+      quiz: [
+        { q: "Height of balanced BST with n nodes?", opts: ["O(n)", "O(log n)", "O(1)", "O(n²)"], ans: 1 },
+        { q: "Which traversal visits left→root→right?", opts: ["Preorder", "Postorder", "Inorder", "Level-order"], ans: 2 },
+        { q: "BFS uses which data structure?", opts: ["Stack", "Heap", "Queue", "Array"], ans: 2 },
+        { q: "AVL trees maintain balance by?", opts: ["Hashing", "Rotations", "Sorting", "Heapifying"], ans: 1 },
+        { q: "A full binary tree has nodes where each node has?", opts: ["Exactly 1 child", "0 or 2 children", "At most 1 child", "Exactly 2 children"], ans: 1 }
+      ]
+    },
+    {
+      id: "graphs",
+      label: "Graphs",
+      icon: "🕸️",
+      desc: "Nodes, edges & traversals",
+      color: "#fbbf24",
+      quiz: [
+        { q: "DFS uses which data structure?", opts: ["Queue", "Stack", "Heap", "Array"], ans: 1 },
+        { q: "Dijkstra's algorithm finds?", opts: ["Minimum spanning tree", "Shortest path", "Topological order", "Connected components"], ans: 1 },
+        { q: "A directed acyclic graph is called?", opts: ["DAG", "DFG", "DCG", "DBG"], ans: 0 },
+        { q: "Which algorithm detects negative weight cycles?", opts: ["Dijkstra", "Prim", "Bellman-Ford", "Floyd-Warshall"], ans: 2 },
+        { q: "An undirected graph with n nodes needs at least how many edges to be connected?", opts: ["n", "n-1", "n+1", "n²"], ans: 1 }
+      ]
+    },
+    {
+      id: "dp",
+      label: "Dynamic Prog.",
+      icon: "♟️",
+      desc: "Optimal substructure & memoization",
+      color: "#f87171",
+      quiz: [
+        { q: "DP solves problems by?", opts: ["Greedy choices", "Breaking into overlapping subproblems", "Random sampling", "Divide & conquer only"], ans: 1 },
+        { q: "Memoization is a form of?", opts: ["Tabulation", "Top-down DP", "Bottom-up DP", "Greedy"], ans: 1 },
+        { q: "Fibonacci with DP has time complexity?", opts: ["O(2ⁿ)", "O(n²)", "O(n)", "O(log n)"], ans: 2 },
+        { q: "The knapsack problem is a classic example of?", opts: ["Graph theory", "Dynamic programming", "Sorting", "Hashing"], ans: 1 },
+        { q: "LCS stands for?", opts: ["Least Common Subsequence", "Longest Common Subsequence", "Last Common String", "None"], ans: 1 }
+      ]
+    }
+  ],
+
+  
+  dbms: [
+    {
+      id: "sql",
+      label: "SQL",
+      iconClass: "devicon-mysql-plain colored",
+      desc: "Structured Query Language",
+      color: "#00758f",
+      quiz: [
+        { q: "SQL stands for?", opts: ["Structured Query Language", "Simple Query Language", "Standard Query Logic", "None"], ans: 0 },
+        { q: "Which command retrieves data?", opts: ["INSERT", "UPDATE", "SELECT", "DELETE"], ans: 2 },
+        { q: "PRIMARY KEY ensures?", opts: ["Uniqueness & not null", "Only uniqueness", "Only not null", "Foreign reference"], ans: 0 },
+        { q: "JOIN combines rows based on?", opts: ["Random matching", "A related column", "Row count", "Index"], ans: 1 },
+        { q: "ACID in DBMS stands for?", opts: ["Atomicity Consistency Isolation Durability", "All Confirmed Indexed Data", "Async Cached Indexed DB", "None"], ans: 0 }
+      ]
+    },
+    {
+      id: "nosql",
+      label: "NoSQL",
+      icon: "🍃",
+      desc: "Non-relational databases",
+      color: "#4db33d",
+      quiz: [
+        { q: "MongoDB stores data as?", opts: ["Tables", "JSON-like documents", "XML files", "CSV rows"], ans: 1 },
+        { q: "Which is NOT a NoSQL database?", opts: ["MongoDB", "Redis", "Cassandra", "MySQL"], ans: 3 },
+        { q: "CAP theorem stands for?", opts: ["Consistency Availability Partition-tolerance", "Copy Access Protocol", "Clustered Access Points", "None"], ans: 0 },
+        { q: "Redis is best known as?", opts: ["Document DB", "In-memory key-value store", "Graph DB", "Column store"], ans: 1 },
+        { q: "NoSQL databases are typically?", opts: ["Strictly relational", "Schema-flexible", "Require SQL", "Always slower"], ans: 1 }
+      ]
+    }
+  ],
+
+  
+  os: [
+    {
+      id: "processes",
+      label: "Processes",
+      icon: "⚙️",
+      desc: "Process lifecycle & scheduling",
+      color: "#94a3b8",
+      quiz: [
+        { q: "A process in the 'waiting' state is waiting for?", opts: ["CPU", "I/O or event", "Memory", "Network"], ans: 1 },
+        { q: "Round Robin is a type of?", opts: ["Memory management", "CPU scheduling", "Disk scheduling", "Network protocol"], ans: 1 },
+        { q: "A deadlock requires how many Coffman conditions?", opts: ["2", "3", "4", "5"], ans: 2 },
+        { q: "Which scheduling gives shortest average wait time?", opts: ["FCFS", "Round Robin", "SJF", "Priority"], ans: 2 },
+        { q: "PCB stands for?", opts: ["Process Control Block", "Program Counter Buffer", "Processor Cache Block", "None"], ans: 0 }
+      ]
+    },
+    {
+      id: "memory",
+      label: "Memory Mgmt.",
+      icon: "🧮",
+      desc: "Paging, segmentation & virtual memory",
+      color: "#7dd3fc",
+      quiz: [
+        { q: "Paging avoids?", opts: ["Thrashing", "External fragmentation", "Internal fragmentation", "Deadlocks"], ans: 1 },
+        { q: "A page fault occurs when?", opts: ["Page is in RAM", "Page is not in RAM", "TLB hits", "Cache hits"], ans: 1 },
+        { q: "LRU stands for?", opts: ["Least Recently Used", "Last Read Unit", "Low Resource Utilization", "None"], ans: 0 },
+        { q: "Virtual memory allows programs to use?", opts: ["Less RAM than physical", "More address space than physical RAM", "Faster CPU", "Larger caches"], ans: 1 },
+        { q: "Thrashing occurs when?", opts: ["CPU is idle", "Too many page faults slow execution", "Disk is full", "RAM overclocked"], ans: 1 }
+      ]
+    }
+  ],
+
+  
+  cn: [
+    {
+      id: "osi",
+      label: "OSI Model",
+      icon: "📶",
+      desc: "7-layer network model",
+      color: "#22d3ee",
+      quiz: [
+        { q: "How many layers does the OSI model have?", opts: ["4", "5", "6", "7"], ans: 3 },
+        { q: "Which layer handles routing?", opts: ["Data Link", "Transport", "Network", "Session"], ans: 2 },
+        { q: "TCP operates at which layer?", opts: ["Network", "Transport", "Session", "Application"], ans: 1 },
+        { q: "HTTP is at which OSI layer?", opts: ["Transport", "Session", "Presentation", "Application"], ans: 3 },
+        { q: "MAC address belongs to which layer?", opts: ["Physical", "Data Link", "Network", "Transport"], ans: 1 }
+      ]
+    },
+    {
+      id: "tcp",
+      label: "TCP/IP",
+      icon: "🔗",
+      desc: "Internet protocol suite",
+      color: "#0ea5e9",
+      quiz: [
+        { q: "TCP handshake involves how many steps?", opts: ["2", "3", "4", "5"], ans: 1 },
+        { q: "IP address version 4 has how many bits?", opts: ["16", "32", "64", "128"], ans: 1 },
+        { q: "DNS translates?", opts: ["IP to MAC", "Domain names to IP", "HTTP to HTTPS", "None"], ans: 1 },
+        { q: "Which port does HTTPS use by default?", opts: ["80", "21", "443", "8080"], ans: 2 },
+        { q: "UDP differs from TCP by being?", opts: ["Connection-oriented", "Reliable", "Connectionless & faster", "Slower"], ans: 2 }
+      ]
+    }
+  ],
+
+  
+  cybersec: [
+    {
+      id: "cryptography",
+      label: "Cryptography",
+      icon: "🔑",
+      desc: "Encryption, hashing & PKI",
+      color: "#f43f5e",
+      quiz: [
+        { q: "AES stands for?", opts: ["Advanced Encryption Standard", "Automatic Encoding System", "Asymmetric Encryption Scheme", "None"], ans: 0 },
+        { q: "RSA is an example of?", opts: ["Symmetric encryption", "Asymmetric encryption", "Hashing", "None"], ans: 1 },
+        { q: "SHA-256 produces a hash of how many bits?", opts: ["128", "256", "512", "64"], ans: 1 },
+        { q: "A digital signature provides?", opts: ["Encryption only", "Authentication & integrity", "Confidentiality only", "None"], ans: 1 },
+        { q: "SSL/TLS is used for?", opts: ["File compression", "Secure data transmission", "User authentication only", "Routing"], ans: 1 }
+      ]
+    },
+    {
+      id: "ethicalhacking",
+      label: "Ethical Hacking",
+      icon: "🕵️",
+      desc: "Penetration testing & vulnerabilities",
+      color: "#e11d48",
+      quiz: [
+        { q: "Penetration testing is also called?", opts: ["Black box audit", "Pen testing", "White hat hacking", "All of the above"], ans: 3 },
+        { q: "SQL injection targets?", opts: ["Network packets", "Web app database queries", "Operating system", "Hardware"], ans: 1 },
+        { q: "A man-in-the-middle attack intercepts?", opts: ["Physical devices", "Communication between two parties", "Only emails", "DNS only"], ans: 1 },
+        { q: "XSS stands for?", opts: ["Extra Secure Script", "Cross-Site Scripting", "Cross-Server System", "None"], ans: 1 },
+        { q: "Nmap is used for?", opts: ["Encrypting files", "Network scanning & port discovery", "Password cracking", "Firewall config"], ans: 1 }
+      ]
+    },
+    {
+      id: "networksec",
+      label: "Network Security",
+      icon: "🛡️",
+      desc: "Firewalls, IDS & VPNs",
+      color: "#fb7185",
+      quiz: [
+        { q: "A firewall filters traffic based on?", opts: ["URL only", "Rules/policies on ports & IPs", "Bandwidth", "Signal strength"], ans: 1 },
+        { q: "IDS stands for?", opts: ["Internet Data Server", "Intrusion Detection System", "Internal DNS Server", "None"], ans: 1 },
+        { q: "VPN provides?", opts: ["Faster internet", "Encrypted private tunnel over public network", "Free bandwidth", "None"], ans: 1 },
+        { q: "DoS attack aims to?", opts: ["Steal data", "Overwhelm & disrupt a service", "Install malware", "Spoof identity"], ans: 1 },
+        { q: "Zero-day vulnerability is?", opts: ["A patched flaw", "Unknown flaw with no fix yet", "Old exploit", "Server misconfiguration"], ans: 1 }
+      ]
+    }
+  ],
+
+  
+  cloud: [
+    {
+      id: "aws",
+      label: "AWS",
+      iconClass: "devicon-amazonwebservices-original colored",
+      desc: "Amazon Web Services fundamentals",
+      color: "#ff9900",
+      quiz: [
+        { q: "Amazon S3 is used for?", opts: ["Computing", "Object storage", "Relational database", "CDN"], ans: 1 },
+        { q: "EC2 stands for?", opts: ["Elastic Compute Cloud", "Extended Cloud Computing", "Enhanced Container Control", "None"], ans: 0 },
+        { q: "AWS Lambda is a?", opts: ["Virtual machine service", "Serverless function service", "Container registry", "CDN service"], ans: 1 },
+        { q: "IAM in AWS manages?", opts: ["Network routing", "Identity & access permissions", "Storage buckets", "Billing only"], ans: 1 },
+        { q: "Which AWS service is a managed relational database?", opts: ["DynamoDB", "S3", "RDS", "Lambda"], ans: 2 }
+      ]
+    },
+    {
+      id: "docker",
+      label: "Docker & K8s",
+      iconClass: "devicon-docker-plain colored",
+      desc: "Containers & orchestration",
+      color: "#2496ed",
+      quiz: [
+        { q: "A Docker container is?", opts: ["A virtual machine", "A lightweight isolated process package", "A cloud server", "A storage volume"], ans: 1 },
+        { q: "Dockerfile is used to?", opts: ["Run containers", "Define instructions to build an image", "Connect containers", "Monitor resources"], ans: 1 },
+        { q: "Kubernetes is used for?", opts: ["Building images", "Orchestrating containers at scale", "Writing code", "Version control"], ans: 1 },
+        { q: "A Kubernetes Pod contains?", opts: ["Nodes", "One or more containers", "Clusters", "Storage volumes only"], ans: 1 },
+        { q: "Docker Hub is?", opts: ["A container runtime", "A public registry of Docker images", "A cloud provider", "An IDE"], ans: 1 }
+      ]
+    },
+    {
+      id: "devops",
+      label: "DevOps",
+      icon: "🔄",
+      desc: "CI/CD, automation & pipelines",
+      color: "#a3e635",
+      quiz: [
+        { q: "CI/CD stands for?", opts: ["Continuous Integration / Continuous Delivery", "Code Inspection / Code Deployment", "None", "Centralized Infrastructure / Cloud Delivery"], ans: 0 },
+        { q: "Jenkins is a tool for?", opts: ["Container management", "CI/CD automation", "Database management", "Cloud hosting"], ans: 1 },
+        { q: "Infrastructure as Code (IaC) means?", opts: ["Writing app code on servers", "Managing infrastructure through code/config files", "Manual server setup", "None"], ans: 1 },
+        { q: "Terraform is used for?", opts: ["Application testing", "IaC provisioning across cloud providers", "Container building", "Monitoring"], ans: 1 },
+        { q: "Git is a?", opts: ["Cloud platform", "Distributed version control system", "CI/CD tool", "Container runtime"], ans: 1 }
+      ]
+    }
+  ],
+
+  
+  ai: [
+    {
+      id: "search",
+      label: "Search Algorithms",
+      icon: "🔍",
+      desc: "BFS, DFS, A* & heuristics",
+      color: "#c084fc",
+      quiz: [
+        { q: "A* search uses which function?", opts: ["f(n)=g(n)+h(n)", "f(n)=g(n)×h(n)", "f(n)=h(n) only", "f(n)=g(n) only"], ans: 0 },
+        { q: "Admissible heuristic never?", opts: ["Underestimates cost", "Overestimates true cost", "Returns zero", "Changes during search"], ans: 1 },
+        { q: "Uninformed search has access to?", opts: ["Heuristic information", "Only problem definition (no heuristic)", "Goal state directly", "All states at once"], ans: 1 },
+        { q: "Greedy best-first search expands nodes based on?", opts: ["Path cost g(n)", "Heuristic h(n) only", "f(n)=g(n)+h(n)", "Depth only"], ans: 1 },
+        { q: "Minimax algorithm is used in?", opts: ["Pathfinding", "Two-player game trees", "Neural networks", "Clustering"], ans: 1 }
+      ]
+    },
+    {
+      id: "reinforcement",
+      label: "Reinforcement Learning",
+      icon: "🎮",
+      desc: "Agents, rewards & Q-learning",
+      color: "#7c3aed",
+      quiz: [
+        { q: "In RL, the agent learns by?", opts: ["Labelled examples", "Receiving rewards & penalties from environment", "Clustering data", "Gradient descent only"], ans: 1 },
+        { q: "Q-learning is a?", opts: ["Supervised method", "Model-free RL algorithm", "Unsupervised method", "Genetic algorithm"], ans: 1 },
+        { q: "Epsilon-greedy strategy manages?", opts: ["Learning rate", "Exploration vs exploitation trade-off", "Batch size", "None"], ans: 1 },
+        { q: "MDP stands for?", opts: ["Maximum Decision Process", "Markov Decision Process", "Minimal Data Pipeline", "None"], ans: 1 },
+        { q: "AlphaGo used which technique?", opts: ["Rule-based AI", "Deep Reinforcement Learning", "Supervised learning only", "Search only"], ans: 1 }
+      ]
+    }
+  ],
+
+  
+  softeng: [
+    {
+      id: "sdlc",
+      label: "SDLC & Agile",
+      icon: "🔄",
+      desc: "Software development lifecycle",
+      color: "#34d399",
+      quiz: [
+        { q: "Agile emphasizes?", opts: ["Heavy documentation", "Working software & iterative delivery", "Fixed requirements", "Waterfall phases"], ans: 1 },
+        { q: "Scrum sprints are typically?", opts: ["6-month cycles", "1-4 week iterative cycles", "Annual releases", "One-time deliveries"], ans: 1 },
+        { q: "TDD stands for?", opts: ["Technical Design Document", "Test-Driven Development", "Total Design Deployment", "None"], ans: 1 },
+        { q: "Which model suits well-defined requirements?", opts: ["Agile", "Scrum", "Waterfall", "Extreme Programming"], ans: 2 },
+        { q: "Code review improves?", opts: ["Code size", "Code quality & finds bugs early", "Deployment speed", "None"], ans: 1 }
+      ]
+    },
+    {
+      id: "designpatterns",
+      label: "Design Patterns",
+      icon: "🧩",
+      desc: "GoF patterns & architecture",
+      color: "#10b981",
+      quiz: [
+        { q: "Singleton ensures?", opts: ["Multiple instances", "Only one instance of a class", "Fast performance", "None"], ans: 1 },
+        { q: "Observer pattern implements?", opts: ["Caching", "Event-driven pub/sub notification", "Data encryption", "Sorting"], ans: 1 },
+        { q: "Factory pattern creates objects?", opts: ["Destroys objects", "Without specifying exact class", "Sorts collections", "None"], ans: 1 },
+        { q: "MVC stands for?", opts: ["Model View Controller", "Module Version Control", "Multiple Value Cache", "None"], ans: 0 },
+        { q: "SOLID principles are for?", opts: ["Database design", "Object-oriented software design", "Network config", "Testing only"], ans: 1 }
+      ]
+    }
+  ],
+
+  
+  signals: [
+    {
+      id: "ctft",
+      label: "CTFT Basics",
+      icon: "📈",
+      desc: "Continuous-time Fourier Transform fundamentals",
+      color: "#f472b6",
+      quiz: [
+        { q: "CTFT converts a signal from?", opts: ["Time domain to frequency domain", "Frequency to time", "Analog to digital", "Digital to analog"], ans: 0 },
+        { q: "The Fourier transform of a time-shifted signal causes?", opts: ["Amplitude scaling only", "Phase shift in frequency domain", "No change", "Frequency inversion"], ans: 1 },
+        { q: "Energy signals have?", opts: ["Finite energy", "Infinite energy", "Zero bandwidth", "No spectrum"], ans: 0 },
+        { q: "Convolution in time domain equals?", opts: ["Multiplication in frequency domain", "Differentiation in frequency domain", "Integration in frequency domain", "No relation"], ans: 0 },
+        { q: "Nyquist criterion helps avoid?", opts: ["Attenuation", "Aliasing", "Harmonics", "Noise"], ans: 1 }
+      ]
+    },
+    {
+      id: "laplace",
+      label: "Laplace Transform",
+      icon: "∫",
+      desc: "s-domain analysis and system behavior",
+      color: "#a78bfa",
+      quiz: [
+        { q: "Laplace transform is mainly used for?", opts: ["Image compression", "Solving differential equations", "Data encryption", "Circuit layout"], ans: 1 },
+        { q: "Region of convergence (ROC) indicates?", opts: ["Where transform exists", "Signal amplitude", "Sampling frequency", "Filter order"], ans: 0 },
+        { q: "Poles are values where transfer function?", opts: ["Becomes zero", "Becomes infinite", "Is constant", "Is periodic"], ans: 1 },
+        { q: "A stable LTI system has poles in?", opts: ["Right-half plane", "Imaginary axis only", "Left-half plane", "At origin only"], ans: 2 },
+        { q: "Inverse Laplace transform gives?", opts: ["Frequency response", "Time-domain signal", "Power spectrum", "Phase only"], ans: 1 }
+      ]
+    }
+  ],
+
+  vlsi: [
+    {
+      id: "mosfet",
+      label: "MOSFET",
+      icon: "🔋",
+      desc: "MOS transistor operation and regions",
+      color: "#8b5cf6",
+      quiz: [
+        { q: "MOSFET has how many terminals?", opts: ["2", "3", "4", "5"], ans: 2 },
+        { q: "CMOS stands for?", opts: ["Complementary Metal-Oxide-Semiconductor", "Current Mode Operating System", "Complex MOS", "None"], ans: 0 },
+        { q: "In digital CMOS, static power is ideally?", opts: ["Very high", "Zero", "Equal to dynamic power", "Negative"], ans: 1 },
+        { q: "Threshold voltage is the minimum gate voltage to?", opts: ["Break oxide", "Create inversion channel", "Increase leakage", "Decrease mobility"], ans: 1 },
+        { q: "PMOS conducts strongly when gate is?", opts: ["High", "Low", "Floating", "At threshold"], ans: 1 }
+      ]
+    },
+    {
+      id: "fabrication",
+      label: "VLSI Fabrication",
+      icon: "🏭",
+      desc: "Lithography and chip manufacturing flow",
+      color: "#7c3aed",
+      quiz: [
+        { q: "Photolithography uses?", opts: ["Magnetic masks", "Light to transfer patterns", "Only heat", "Only pressure"], ans: 1 },
+        { q: "Doping in semiconductors is done to?", opts: ["Reduce wafer size", "Control conductivity", "Increase color", "Lower melting point"], ans: 1 },
+        { q: "Wafer material most commonly used is?", opts: ["Copper", "Silicon", "Aluminum", "Graphite"], ans: 1 },
+        { q: "Etching process removes?", opts: ["Unwanted material", "All metal layers", "Only resist", "Clock skew"], ans: 0 },
+        { q: "Smaller technology node generally means?", opts: ["Larger transistors", "Higher integration density", "Lower performance", "No change"], ans: 1 }
+      ]
+    }
+  ],
+
+  comm: [
+    {
+      id: "analogmod",
+      label: "Analog Modulation",
+      icon: "📻",
+      desc: "AM, FM and PM concepts",
+      color: "#14b8a6",
+      quiz: [
+        { q: "AM stands for?", opts: ["Amplitude Modulation", "Analog Mapping", "Adaptive Modulation", "None"], ans: 0 },
+        { q: "FM is generally more resistant to?", opts: ["Power loss", "Noise", "Bandwidth", "Interference by design"], ans: 1 },
+        { q: "Carrier signal is used to?", opts: ["Store data", "Transport information over channel", "Amplify noise", "Filter harmonics"], ans: 1 },
+        { q: "Demodulation is the process of?", opts: ["Encrypting signal", "Recovering original message", "Sampling signal", "Compressing signal"], ans: 1 },
+        { q: "FM bandwidth is estimated by?", opts: ["Ohm's law", "Carson's rule", "Kirchhoff's law", "Nyquist only"], ans: 1 }
+      ]
+    },
+    {
+      id: "digitalcomm",
+      label: "Digital Communication",
+      icon: "📡",
+      desc: "Bit transmission and error control",
+      color: "#22c55e",
+      quiz: [
+        { q: "Bit Error Rate (BER) measures?", opts: ["Data speed", "Fraction of bits received in error", "Signal power", "Channel length"], ans: 1 },
+        { q: "QPSK carries how many bits per symbol?", opts: ["1", "2", "3", "4"], ans: 1 },
+        { q: "Channel coding is used for?", opts: ["Compression", "Error detection and correction", "Encryption only", "Synchronization only"], ans: 1 },
+        { q: "Shannon capacity gives the?", opts: ["Maximum reliable data rate", "Antenna gain", "Symbol timing", "Noise margin only"], ans: 0 },
+        { q: "OFDM is widely used in?", opts: ["Wi-Fi and LTE", "AM radio only", "CD players", "Ethernet hubs"], ans: 0 }
+      ]
+    }
+  ],
+
+  
+  circuits: [
+    {
+      id: "networklaws",
+      label: "Network Laws",
+      icon: "🔌",
+      desc: "Ohm, KCL and KVL fundamentals",
+      color: "#eab308",
+      quiz: [
+        { q: "Ohm's law is?", opts: ["V = I/R", "V = IR", "I = VR", "P = VI"], ans: 1 },
+        { q: "KCL applies at a?", opts: ["Loop", "Node", "Resistor", "Power source"], ans: 1 },
+        { q: "KVL states sum of voltages in a loop is?", opts: ["One", "Infinite", "Zero", "Current"], ans: 2 },
+        { q: "Unit of capacitance is?", opts: ["Henry", "Farad", "Ohm", "Siemens"], ans: 1 },
+        { q: "Power in a resistor can be written as?", opts: ["I/R", "V/I", "I^2R", "R/V"], ans: 2 }
+      ]
+    },
+    {
+      id: "acanalysis",
+      label: "AC Analysis",
+      icon: "〰️",
+      desc: "Reactance, impedance and phasors",
+      color: "#f59e0b",
+      quiz: [
+        { q: "Impedance combines?", opts: ["Resistance and reactance", "Current and voltage", "Power and energy", "Frequency and phase"], ans: 0 },
+        { q: "Inductive reactance increases with?", opts: ["Lower frequency", "Higher frequency", "Higher resistance", "Lower voltage"], ans: 1 },
+        { q: "Capacitive reactance decreases with?", opts: ["Higher frequency", "Lower frequency", "Higher current", "Higher power"], ans: 0 },
+        { q: "Power factor is the cosine of?", opts: ["Current", "Voltage", "Phase angle", "Frequency"], ans: 2 },
+        { q: "RMS value of sinusoid is peak divided by?", opts: ["2", "sqrt(2)", "pi", "4"], ans: 1 }
+      ]
+    }
+  ],
+
+  machines: [
+    {
+      id: "transformers",
+      label: "Transformers",
+      icon: "⚙️",
+      desc: "Principle, losses and efficiency",
+      color: "#f97316",
+      quiz: [
+        { q: "Transformer works on?", opts: ["Electrostatic induction", "Mutual induction", "Photoelectric effect", "Piezoelectric effect"], ans: 1 },
+        { q: "Step-up transformer increases?", opts: ["Current", "Voltage", "Frequency", "Power factor"], ans: 1 },
+        { q: "Core losses include?", opts: ["Copper loss only", "Hysteresis and eddy current loss", "Mechanical loss", "Stray load only"], ans: 1 },
+        { q: "Transformer frequency at output is?", opts: ["Changed", "Same as input", "Half", "Double"], ans: 1 },
+        { q: "Ideal transformer efficiency is?", opts: ["0%", "50%", "100%", "Depends on load only"], ans: 2 }
+      ]
+    },
+    {
+      id: "motors",
+      label: "Electric Motors",
+      icon: "🏭",
+      desc: "DC and induction motor basics",
+      color: "#fb7185",
+      quiz: [
+        { q: "Slip in induction motor is?", opts: ["Ns - Nr over Ns", "Nr - Ns over Nr", "Ns + Nr", "Nr/Ns only"], ans: 0 },
+        { q: "Synchronous speed depends on?", opts: ["Voltage only", "Supply frequency and poles", "Rotor resistance", "Load torque"], ans: 1 },
+        { q: "Back EMF in DC motor mainly?", opts: ["Opposes supply voltage", "Increases supply voltage", "Reduces flux", "Increases speed always"], ans: 0 },
+        { q: "Induction motors are generally?", opts: ["Self-starting", "Need external starter always", "Only single-phase", "Not used industrially"], ans: 0 },
+        { q: "Torque in motor is proportional to?", opts: ["Flux and armature current", "Frequency only", "Voltage only", "Resistance only"], ans: 0 }
+      ]
+    }
+  ],
+
+  power: [
+    {
+      id: "generation",
+      label: "Power Generation",
+      icon: "⚡",
+      desc: "Thermal, hydro and renewable basics",
+      color: "#86efac",
+      quiz: [
+        { q: "Alternators generate?", opts: ["DC", "AC", "Both always", "Pulse only"], ans: 1 },
+        { q: "Solar PV converts?", opts: ["Heat to power", "Light to electricity", "Wind to electricity", "Chemical to light"], ans: 1 },
+        { q: "Load factor is ratio of?", opts: ["Average load to peak load", "Peak load to average load", "Generation to demand", "Voltage to current"], ans: 0 },
+        { q: "Frequency in Indian grid is nominally?", opts: ["50 Hz", "60 Hz", "25 Hz", "100 Hz"], ans: 0 },
+        { q: "Plant efficiency improvement reduces?", opts: ["Fuel consumption", "Output power", "Voltage level", "Transmission losses only"], ans: 0 }
+      ]
+    },
+    {
+      id: "transmission",
+      label: "Transmission",
+      icon: "🗼",
+      desc: "HV lines and power delivery",
+      color: "#4ade80",
+      quiz: [
+        { q: "High transmission voltage is used to?", opts: ["Increase losses", "Reduce I^2R losses", "Reduce power", "Increase current"], ans: 1 },
+        { q: "Corona loss occurs in?", opts: ["Underground cables only", "Overhead lines", "Transformers only", "Batteries"], ans: 1 },
+        { q: "Substations are used for?", opts: ["Only generation", "Voltage transformation and switching", "Billing only", "Storage only"], ans: 1 },
+        { q: "Per unit system helps in?", opts: ["Complexity reduction in calculations", "Increasing line voltage", "Insulation testing only", "Tariff setting"], ans: 0 },
+        { q: "Reactive power is mainly managed by?", opts: ["Capacitors/reactors", "Resistors", "Fuses", "Meters"], ans: 0 }
+      ]
+    }
+  ],
+
+  
+  thermo: [
+    {
+      id: "laws",
+      label: "Thermo Laws",
+      icon: "🌡️",
+      desc: "First and second law fundamentals",
+      color: "#ef4444",
+      quiz: [
+        { q: "First law of thermodynamics is conservation of?", opts: ["Mass", "Energy", "Momentum", "Entropy"], ans: 1 },
+        { q: "Second law introduces concept of?", opts: ["Pressure", "Entropy", "Volume", "Enthalpy only"], ans: 1 },
+        { q: "A reversible process is?", opts: ["Always fast", "Idealized with no entropy generation", "Impossible", "At constant pressure only"], ans: 1 },
+        { q: "SI unit of entropy is?", opts: ["J", "J/kg-K", "Pa", "W"], ans: 1 },
+        { q: "Heat engine efficiency is output?", opts: ["Heat input/Work", "Work output/Heat input", "Work input/Heat output", "Power/Volume"], ans: 1 }
+      ]
+    },
+    {
+      id: "cycles",
+      label: "Power Cycles",
+      icon: "🔄",
+      desc: "Otto, Diesel and Rankine cycles",
+      color: "#f87171",
+      quiz: [
+        { q: "Otto cycle is ideal cycle for?", opts: ["Diesel engines", "Spark ignition engines", "Gas turbines", "Steam turbines"], ans: 1 },
+        { q: "Diesel cycle adds heat at?", opts: ["Constant volume", "Constant pressure", "Constant temperature", "Constant entropy"], ans: 1 },
+        { q: "Rankine cycle is used in?", opts: ["Steam power plants", "Petrol engines", "Refrigerators only", "Air compressors only"], ans: 0 },
+        { q: "Carnot efficiency depends on?", opts: ["Working fluid only", "Source and sink temperatures", "Pressure ratio", "Cycle speed"], ans: 1 },
+        { q: "Regeneration in cycles generally?", opts: ["Lowers efficiency", "Improves thermal efficiency", "Stops turbine", "Increases friction"], ans: 1 }
+      ]
+    }
+  ],
+
+  fluid: [
+    {
+      id: "properties",
+      label: "Fluid Properties",
+      icon: "💧",
+      desc: "Density, viscosity and pressure",
+      color: "#38bdf8",
+      quiz: [
+        { q: "Pressure at a point in static fluid acts?", opts: ["Only upward", "Only downward", "Equally in all directions", "Only sideways"], ans: 2 },
+        { q: "Dynamic viscosity unit is?", opts: ["Pa·s", "N", "J", "m/s"], ans: 0 },
+        { q: "Specific gravity is ratio of?", opts: ["Mass to volume", "Fluid density to water density", "Pressure to area", "Force to volume"], ans: 1 },
+        { q: "Bernoulli equation is based on conservation of?", opts: ["Mass only", "Energy", "Momentum only", "Charge"], ans: 1 },
+        { q: "Reynolds number predicts?", opts: ["Boiling point", "Flow regime", "Fluid color", "Compressibility only"], ans: 1 }
+      ]
+    },
+    {
+      id: "flow",
+      label: "Flow Mechanics",
+      icon: "🌊",
+      desc: "Laminar/turbulent flow and continuity",
+      color: "#0ea5e9",
+      quiz: [
+        { q: "Continuity equation is derived from conservation of?", opts: ["Mass", "Energy", "Momentum", "Temperature"], ans: 0 },
+        { q: "Laminar flow is generally at?", opts: ["High Reynolds number", "Low Reynolds number", "Any Reynolds number", "Supersonic only"], ans: 1 },
+        { q: "Head loss in pipe flow increases with?", opts: ["Smaller roughness and shorter length", "Higher velocity and longer length", "Lower viscosity", "Lower density"], ans: 1 },
+        { q: "Venturimeter measures?", opts: ["Temperature", "Discharge/flow rate", "Viscosity", "Density"], ans: 1 },
+        { q: "Boundary layer forms due to?", opts: ["No-slip condition", "Perfect slip", "Zero viscosity", "Constant density"], ans: 0 }
+      ]
+    }
+  ],
+
+  manufacturing: [
+    {
+      id: "casting",
+      label: "Casting",
+      icon: "🧱",
+      desc: "Molds, solidification and defects",
+      color: "#84cc16",
+      quiz: [
+        { q: "Casting process involves?", opts: ["Removing material", "Pouring molten metal into mold", "Only welding", "Only rolling"], ans: 1 },
+        { q: "Riser in casting is used to?", opts: ["Decorate mold", "Feed molten metal during shrinkage", "Cool faster", "Filter gases only"], ans: 1 },
+        { q: "Common casting defect is?", opts: ["Porosity", "Threading", "Knurling", "Shot peening"], ans: 0 },
+        { q: "Pattern allowance is given for?", opts: ["No reason", "Shrinkage and machining", "Color coding", "Lubrication"], ans: 1 },
+        { q: "Die casting is suitable for?", opts: ["High volume production", "Single prototype only", "Wood parts", "Ceramic only"], ans: 0 }
+      ]
+    },
+    {
+      id: "machining",
+      label: "Machining",
+      icon: "🛠️",
+      desc: "Turning, milling and drilling",
+      color: "#65a30d",
+      quiz: [
+        { q: "Lathe machine primarily performs?", opts: ["Milling", "Turning", "Drilling only", "Grinding only"], ans: 1 },
+        { q: "Cutting speed unit is commonly?", opts: ["m/min", "kg/s", "N-m", "Pa"], ans: 0 },
+        { q: "Tool wear generally increases with?", opts: ["Lower temperature", "Higher cutting speed", "Lower feed", "Coolant use"], ans: 1 },
+        { q: "Milling cutter rotates while workpiece?", opts: ["Always rotates together", "Moves relative to cutter", "Is molten", "Is fixed forever"], ans: 1 },
+        { q: "CNC stands for?", opts: ["Computer Numerical Control", "Central Network Control", "Cutting Number Code", "None"], ans: 0 }
+      ]
+    }
+  ],
+
+  
+  structural: [
+    {
+      id: "som",
+      label: "Strength of Materials",
+      icon: "🏛️",
+      desc: "Stress, strain and deformation",
+      color: "#84cc16",
+      quiz: [
+        { q: "Stress is force per?", opts: ["Volume", "Area", "Length", "Mass"], ans: 1 },
+        { q: "Young's modulus is ratio of?", opts: ["Stress to strain", "Strain to stress", "Load to area", "Force to volume"], ans: 0 },
+        { q: "Unit of stress is?", opts: ["N", "Pa", "J", "W"], ans: 1 },
+        { q: "Shear stress acts?", opts: ["Normal to area", "Tangential to area", "At center only", "Randomly"], ans: 1 },
+        { q: "Factor of safety is?", opts: ["Ultimate stress / working stress", "Working stress / ultimate stress", "Load / area", "Stress / strain"], ans: 0 }
+      ]
+    },
+    {
+      id: "rcdesign",
+      label: "RCC Design",
+      icon: "🏗️",
+      desc: "Reinforced concrete member design",
+      color: "#65a30d",
+      quiz: [
+        { q: "Concrete is strong in?", opts: ["Tension", "Compression", "Both equal", "Neither"], ans: 1 },
+        { q: "Steel reinforcement is mainly provided to resist?", opts: ["Compression only", "Tension", "Color fading", "Shrinkage only"], ans: 1 },
+        { q: "M20 concrete means characteristic strength of?", opts: ["10 MPa", "20 MPa", "30 MPa", "40 MPa"], ans: 1 },
+        { q: "Clear cover in RCC is provided for?", opts: ["Decoration", "Corrosion and fire protection", "Weight reduction", "Faster curing"], ans: 1 },
+        { q: "Limit state design considers?", opts: ["Only collapse", "Safety and serviceability", "Only economy", "Only aesthetics"], ans: 1 }
+      ]
+    }
+  ],
+
+  geotech: [
+    {
+      id: "soilprops",
+      label: "Soil Properties",
+      icon: "🌍",
+      desc: "Classification and index properties",
+      color: "#b45309",
+      quiz: [
+        { q: "Soil with particle size < 0.002 mm is?", opts: ["Sand", "Silt", "Clay", "Gravel"], ans: 2 },
+        { q: "Atterberg limits apply mainly to?", opts: ["Coarse soils", "Fine-grained soils", "Rocks", "Concrete"], ans: 1 },
+        { q: "Void ratio is ratio of?", opts: ["Volume of voids to volume of solids", "Solids to voids", "Water to air", "Mass to volume"], ans: 0 },
+        { q: "Specific gravity of soil solids is around?", opts: ["0.5", "1.0", "2.65", "5.0"], ans: 2 },
+        { q: "Compaction increases?", opts: ["Void space", "Dry density", "Water content always", "Compressibility"], ans: 1 }
+      ]
+    },
+    {
+      id: "foundations",
+      label: "Foundations",
+      icon: "🧱",
+      desc: "Bearing capacity and settlement",
+      color: "#92400e",
+      quiz: [
+        { q: "Shallow foundations include?", opts: ["Pile foundation", "Raft footing", "Caisson", "Well foundation"], ans: 1 },
+        { q: "Bearing capacity is the soil's ability to?", opts: ["Hold water", "Support loads safely", "Increase settlement", "Reduce cohesion"], ans: 1 },
+        { q: "Pile foundations are used when?", opts: ["Top soil is weak", "Soil is always hard", "No loads exist", "Only for small buildings"], ans: 0 },
+        { q: "Settlement should be?", opts: ["Unlimited", "Within permissible limits", "Ignored", "Maximum possible"], ans: 1 },
+        { q: "SPT is used to estimate?", opts: ["Concrete strength", "Soil resistance/profile", "Steel grade", "Traffic density"], ans: 1 }
+      ]
+    }
+  ],
+
+  transport: [
+    {
+      id: "highway",
+      label: "Highway Engineering",
+      icon: "🛣️",
+      desc: "Road geometry and pavement basics",
+      color: "#22c55e",
+      quiz: [
+        { q: "Camber on roads is provided for?", opts: ["Aesthetics", "Drainage", "Speed increase", "Lane marking"], ans: 1 },
+        { q: "Flexible pavement primarily uses?", opts: ["Bituminous layers", "Prestressed concrete only", "Steel plates", "Wood"], ans: 0 },
+        { q: "Super-elevation helps vehicles on curves by?", opts: ["Reducing sight distance", "Countering centrifugal force", "Increasing potholes", "Reducing friction to zero"], ans: 1 },
+        { q: "IRC in India relates to?", opts: ["Road standards", "Railways", "Airports", "Ports only"], ans: 0 },
+        { q: "PCU stands for?", opts: ["Pavement Control Unit", "Passenger Car Unit", "Public Corridor Unit", "None"], ans: 1 }
+      ]
+    },
+    {
+      id: "traffic",
+      label: "Traffic Engineering",
+      icon: "🚦",
+      desc: "Flow, control and intersection design",
+      color: "#16a34a",
+      quiz: [
+        { q: "Traffic volume is measured in?", opts: ["km/h", "vehicles per unit time", "tons", "joules"], ans: 1 },
+        { q: "LOS in traffic engineering means?", opts: ["Level of Service", "Length of Signal", "Lane Operating Speed", "Line of Sight"], ans: 0 },
+        { q: "Signal cycle time is?", opts: ["Time for one complete red-yellow-green sequence", "Only green interval", "Only red interval", "Pedestrian time"], ans: 0 },
+        { q: "Peak Hour Factor indicates?", opts: ["Fuel efficiency", "Variation in traffic flow during peak hour", "Pavement thickness", "Road safety only"], ans: 1 },
+        { q: "Roundabouts generally help by?", opts: ["Increasing conflict points", "Reducing severe conflict points", "Eliminating all delays", "Increasing stop times"], ans: 1 }
+      ]
+    }
+  ]
+};
+
+export { TOPICS_DATA };
+
+
+
+
+FILE: js/app.js
+================================================================================
+import { BRANCHES_DATA } from '../data/branches.js';
+import { DOMAINS_DATA } from '../data/domains.js';
+import { TOPICS_DATA } from '../data/topics.js';
+import { CardManager } from './card-manager.js';
+import { QuizManager } from './quiz-manager.js';
+import { Confetti } from './confetti.js';
+import { getEl, formatBreadcrumb } from './utils.js';
+
+const SESSION_KEY = 'swipelearn-session';
+
+export class SwipeLearnApp {
+  constructor() {
+    this.cardManager = null;
+    this.quizManager = null;
+    this.confetti = new Confetti('confetti-canvas');
+    this.state = {
+      currentStage: 'splash', // splash, branch, domain, topic, quiz, result
+      selectedBranch: null,
+      selectedDomain: null,
+      selectedTopic: null
+    };
+
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    getEl('btn-start').addEventListener('click', () => this.startApp());
+
+    getEl('btn-back').addEventListener('click', () => this.goBack());
+    getEl('btn-quiz-back').addEventListener('click', () => this.goBack());
+
+    getEl('act-skip').addEventListener('click', () => {
+      if (this.cardManager) this.cardManager.previousCard();
+    });
+    getEl('act-pick').addEventListener('click', () => {
+      if (this.cardManager) this.cardManager.nextCard();
+    });
+
+    getEl('btn-next').addEventListener('click', () => {
+      if (this.quizManager) this.quizManager.nextQuestion();
+    });
+
+    getEl('btn-retry').addEventListener('click', () => this.retryQuiz());
+    getEl('btn-home').addEventListener('click', () => this.goHome());
+  }
+
+  startApp() {
+    this.switchStage('cards');
+    setTimeout(() => this.loadBranches(), 100);
+  }
+
+  loadBranches() {
+    try {
+      this.cardManager = new CardManager('branch');
+      this.cardManager.setCards(BRANCHES_DATA);
+      this.cardManager.on('pick', (branch) => this.selectBranch(branch));
+      this.cardManager.on('skip', () => {});
+      this.cardManager.on('empty', () => this.showEmpty());
+
+      getEl('stage-label').textContent = 'Choose Your Branch';
+      getEl('breadcrumb').innerHTML = '';
+      getEl('btn-back').style.display = 'none';
+    } catch (error) {
+      console.error('Error loading branches:', error);
+    }
+  }
+
+  selectBranch(branch) {
+    this.state.selectedBranch = branch;
+    this.switchStage('cards');
+    this.loadDomains(branch.id);
+  }
+
+  selectDomain(domain) {
+    this.state.selectedDomain = domain;
+    this.switchStage('cards');
+    this.loadTopics(domain.id);
+  }
+
+  loadDomains(branchId) {
+    try {
+      const domains = DOMAINS_DATA[branchId] || [];
+      this.cardManager = new CardManager('domain');
+      this.cardManager.setCards(domains);
+      this.cardManager.on('pick', (domain) => this.selectDomain(domain));
+      this.cardManager.on('skip', () => {});
+      this.cardManager.on('empty', () => this.showEmpty());
+
+      getEl('stage-label').textContent = 'Choose Your Domain';
+      getEl('breadcrumb').innerHTML = formatBreadcrumb(this.state.selectedBranch.label);
+      getEl('btn-back').style.display = 'flex';
+    } catch (error) {
+      console.error('Error loading domains:', error);
+    }
+  }
+
+  loadTopics(domainId) {
+    try {
+      const topics = TOPICS_DATA[domainId] || [];
+      this.cardManager = new CardManager('topic');
+      this.cardManager.setCards(topics);
+      this.cardManager.on('pick', (topic) => this.startQuiz(topic));
+      this.cardManager.on('skip', () => {});
+      this.cardManager.on('empty', () => this.showEmpty());
+
+      getEl('stage-label').textContent = 'Choose Your Topic';
+      getEl('breadcrumb').innerHTML = formatBreadcrumb(
+        this.state.selectedBranch.label,
+        this.state.selectedDomain.label
+      );
+      getEl('btn-back').style.display = 'flex';
+    } catch (error) {
+      console.error('Error loading topics:', error);
+    }
+  }
+
+  startQuiz(topic) {
+    this.state.selectedTopic = topic;
+    this.quizManager = new QuizManager();
+    this.quizManager.on('complete', (result) => this.showResult(result));
+    this.quizManager.loadQuiz(topic.quiz);
+
+    getEl('quiz-topic-label').textContent = topic.label;
+    this.switchStage('quiz');
+  }
+
+  showResult(result) {
+    const percentage = result.total > 0
+      ? Math.max(0, Math.min(100, Math.round((result.score / result.total) * 100)))
+      : 0;
+    const ringFill = getEl('ring-fill');
+    const ringText = getEl('ring-text');
+    const resultMsg = getEl('result-msg');
+    const resultTrophy = getEl('result-trophy');
+
+    ringText.textContent = `${result.score}/${result.total}`;
+
+    let message = '';
+    let trophy = '🏆';
+
+    if (percentage === 100) {
+      message = 'Perfect score! You\'re a master of this topic! 🌟';
+      trophy = '👑';
+    } else if (percentage >= 80) {
+      message = 'Excellent! Outstanding performance! Keep it up!'  
+      trophy = '🏆';
+    } else if (percentage >= 60) {
+      message = 'Good job! You\'re on the right track. Practice more!';
+      trophy = '🎯';
+    } else if (percentage >= 40) {
+      message = 'Not bad! Review the topic and try again.';
+      trophy = '📚';
+    } else {
+      message = 'Keep learning! This topic needs more practice.';
+      trophy = '💪';
+    }
+
+    resultTrophy.textContent = trophy;
+    resultMsg.textContent = message;
+
+    this.switchStage('result');
+
+    if (ringFill) {
+      const radius = ringFill.r?.baseVal?.value || Number(ringFill.getAttribute('r')) || 52;
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference * (1 - percentage / 100);
+
+      ringFill.style.transition = 'none';
+      ringFill.style.strokeDasharray = `${circumference} ${circumference}`;
+      ringFill.style.strokeDashoffset = `${circumference}`;
+
+      void ringFill.getBoundingClientRect();
+
+      ringFill.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s';
+      ringFill.style.strokeDashoffset = `${offset}`;
+    }
+
+    if (result.score >= 4) {
+      this.confetti.burst();
+    }
+  }
+
+  retryQuiz() {
+    if (this.state.selectedTopic) {
+      this.startQuiz(this.state.selectedTopic);
+    }
+  }
+
+  goBack() {
+    const stage = this.state.currentStage;
+    if (stage === 'quiz' || stage === 'result') {
+      this.switchStage('cards');
+      this.loadTopics(this.state.selectedDomain.id);
+    } else if (this.state.selectedDomain) {
+      this.switchStage('cards');
+      this.loadDomains(this.state.selectedBranch.id);
+    } else if (this.state.selectedBranch) {
+      this.switchStage('cards');
+      this.loadBranches();
+    }
+  }
+
+  goHome() {
+    this.state = {
+      currentStage: 'splash',
+      selectedBranch: null,
+      selectedDomain: null,
+      selectedTopic: null
+    };
+    this.switchStage('splash');
+  }
+
+  showEmpty() {
+  }
+
+  switchStage(stageName) {
+    document.querySelectorAll('.screen').forEach(screen => {
+      screen.classList.remove('active', 'exit');
+    });
+
+    const screen = getEl(`screen-${stageName}`);
+    if (screen) {
+      screen.classList.add('active');
+    }
+
+    this.state.currentStage = stageName;
+  }
+
+  init() {
+    if (!localStorage.getItem(SESSION_KEY)) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    this.switchStage('splash');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new SwipeLearnApp();
+  app.init();
+});
+
+
+
+
+FILE: js/card-manager.js
+================================================================================
+import { getEl } from './utils.js';
+
+export class CardManager {
+  constructor(stage = 'branch') {
+    this.stage = stage;
+    this.cards = [];
+    this.currentIndex = 0;
+    this.listeners = [];
+    this.cardStack = getEl('card-stack');
+  }
+
+  setCards(cards) {
+    this.cards = cards;
+    this.currentIndex = 0;
+    this.render();
+  }
+
+  render() {
+    this.cardStack.innerHTML = '';
+    
+    if (this.cards.length === 0) {
+      return;
+    }
+
+    const card = this.cards[this.currentIndex];
+    const cardEl = this.createCardElement(card);
+    this.cardStack.appendChild(cardEl);
+    this.updateCounter();
+  }
+
+  createCardElement(card) {
+    const div = document.createElement('div');
+    div.className = `swipe-card ${this.stage === 'branch' ? 'branch-card' : ''}`;
+    div.setAttribute('data-stage', this.stage);
+    div.setAttribute('role', 'button');
+    div.setAttribute('tabindex', '0');
+    div.setAttribute('aria-label', `Select ${card.label}`);
+    div.innerHTML = `
+      <div class="card-tag">${this.stage.toUpperCase()}</div>
+      <div class="card-icon-wrap">
+        ${card.iconClass ? `<i class="${card.iconClass}"></i>` : `<span>${card.icon}</span>`}
+      </div>
+      <h3 class="card-title">${card.label}</h3>
+      <p class="card-desc">${card.desc}</p>
+    `;
+
+    div.addEventListener('click', () => this.selectCurrentCard());
+    div.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        this.selectCurrentCard();
+      }
+    });
+
+    return div;
+  }
+
+  selectCurrentCard() {
+    if (this.currentIndex < this.cards.length) {
+      const card = this.cards[this.currentIndex];
+      this.emit('pick', card);
+    }
+  }
+
+  nextCard() {
+    if (this.currentIndex < this.cards.length - 1) {
+      this.currentIndex++;
+      this.render();
+    }
+  }
+
+  previousCard() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.render();
+    }
+  }
+
+  updateCounter() {
+    const counter = getEl('card-counter');
+    if (counter) {
+      counter.textContent = `${this.currentIndex + 1} / ${this.cards.length}`;
+    }
+  }
+
+  on(event, callback) {
+    this.listeners.push({ event, callback });
+  }
+
+  emit(event, data) {
+    this.listeners
+      .filter(l => l.event === event)
+      .forEach(l => l.callback(data));
+  }
+}
+
+
+
+
+FILE: js/confetti.js
+================================================================================
+export class Confetti {
+  constructor(canvasId) {
+    this.canvas = document.getElementById(canvasId);
+    this.ctx = this.canvas.getContext('2d');
+    this.particles = [];
+    this.animationId = null;
+
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+  }
+
+  resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  }
+
+  createParticles(count = 50) {
+    this.particles = [];
+    for (let i = 0; i < count; i++) {
+      this.particles.push({
+        x: Math.random() * this.canvas.width,
+        y: -20,
+        vx: (Math.random() - 0.5) * 8,
+        vy: Math.random() * 5 + 3,
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 8 + 4,
+        color: this.getRandomColor()
+      });
+    }
+  }
+
+  getRandomColor() {
+    const colors = ['#7c5cfc', '#fc5ca0', '#5cf0fc', '#3dfcb0', '#fbbf24', '#f87171'];
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  animate() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    for (let i = this.particles.length - 1; i >= 0; i--) {
+      const p = this.particles[i];
+
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.2; // gravity
+      p.rotation += p.rotationSpeed;
+
+      if (p.y > this.canvas.height) {
+        this.particles.splice(i, 1);
+        continue;
+      }
+
+      this.ctx.save();
+      this.ctx.translate(p.x, p.y);
+      this.ctx.rotate(p.rotation);
+      this.ctx.fillStyle = p.color;
+      this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+      this.ctx.restore();
+    }
+
+    if (this.particles.length > 0) {
+      this.animationId = requestAnimationFrame(() => this.animate());
+    }
+  }
+
+  burst() {
+    this.createParticles(100);
+    this.animate();
+  }
+}
+
+
+
+
+FILE: js/login.js
+================================================================================
+const USERS_KEY = 'swipelearn-users';
+const SESSION_KEY = 'swipelearn-session';
+
+const authTitle = document.getElementById('auth-title');
+const authSubtitle = document.getElementById('auth-subtitle');
+const authForm = document.getElementById('auth-form');
+const nameGroup = document.getElementById('name-group');
+const nameInput = document.getElementById('auth-name');
+const emailInput = document.getElementById('auth-email');
+const passwordInput = document.getElementById('auth-password');
+const messageEl = document.getElementById('auth-message');
+const submitBtn = document.getElementById('btn-auth-submit');
+const toggleBtn = document.getElementById('btn-toggle-mode');
+
+let mode = 'login';
+
+function readUsers() {
+  try {
+    const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+    return Array.isArray(users) ? users : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeUsers(users) {
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
+function setMessage(text, type = '') {
+  messageEl.textContent = text;
+  messageEl.classList.remove('error', 'success');
+  if (type) messageEl.classList.add(type);
+}
+
+function normalizeEmail(email) {
+  return String(email || '').trim().toLowerCase();
+}
+
+function switchMode(nextMode) {
+  mode = nextMode;
+  const isSignup = mode === 'signup';
+
+  authTitle.textContent = isSignup ? 'Create Account' : 'Welcome Back';
+  authSubtitle.textContent = isSignup
+    ? 'Sign up to save your progress on this device.'
+    : 'Log in to continue your learning journey.';
+
+  nameGroup.classList.toggle('is-hidden', !isSignup);
+  nameInput.required = isSignup;
+
+  submitBtn.innerHTML = isSignup
+    ? '<span>Sign Up</span><i class="fa-solid fa-user-plus"></i>'
+    : '<span>Log In</span><i class="fa-solid fa-right-to-bracket"></i>';
+
+  toggleBtn.textContent = isSignup
+    ? 'Already have an account? Log in'
+    : 'Need an account? Sign up';
+
+  setMessage('');
+}
+
+function createSession(user) {
+  const session = {
+    name: user.name,
+    email: user.email,
+    loggedInAt: new Date().toISOString()
+  };
+  localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+}
+
+function signup(name, email, password) {
+  if (!name || name.trim().length < 2) {
+    setMessage('Please enter a valid name.', 'error');
+    return;
+  }
+
+  if (password.length < 6) {
+    setMessage('Password must be at least 6 characters.', 'error');
+    return;
+  }
+
+  const users = readUsers();
+  const normalized = normalizeEmail(email);
+  const exists = users.some((u) => u.email === normalized);
+
+  if (exists) {
+    setMessage('Account already exists. Please log in.', 'error');
+    return;
+  }
+
+  const newUser = {
+    name: name.trim(),
+    email: normalized,
+    password
+  };
+
+  users.push(newUser);
+  writeUsers(users);
+  createSession(newUser);
+  setMessage('Account created. Redirecting...', 'success');
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 400);
+}
+
+function login(email, password) {
+  const users = readUsers();
+  const normalized = normalizeEmail(email);
+  const user = users.find((u) => u.email === normalized && u.password === password);
+
+  if (!user) {
+    setMessage('Invalid email or password.', 'error');
+    return;
+  }
+
+  createSession(user);
+  setMessage('Login successful. Redirecting...', 'success');
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 300);
+}
+
+if (localStorage.getItem(SESSION_KEY)) {
+  window.location.href = 'index.html';
+}
+
+toggleBtn.addEventListener('click', () => {
+  switchMode(mode === 'login' ? 'signup' : 'login');
+});
+
+authForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const email = emailInput.value;
+  const password = passwordInput.value;
+
+  if (mode === 'signup') {
+    signup(nameInput.value, email, password);
+    return;
+  }
+
+  login(email, password);
+});
+
+switchMode('login');
+
+
+
+
+FILE: js/quiz-manager.js
+================================================================================
+import { getEl, shuffle } from './utils.js';
+
+export class QuizManager {
+  constructor() {
+    this.currentQuiz = null;
+    this.currentQuestion = 0;
+    this.score = 0;
+    this.totalQuestions = 0;
+    this.selectedAnswer = null;
+    this.listeners = [];
+  }
+
+  loadQuiz(quizData) {
+    this.currentQuiz = Array.isArray(quizData) ? quizData : [];
+    this.currentQuestion = 0;
+    this.score = 0;
+    this.totalQuestions = this.currentQuiz.length;
+    this.selectedAnswer = null;
+    const scoreText = getEl('quiz-score-text');
+    if (scoreText) scoreText.textContent = '0';
+    this.render();
+  }
+
+  render() {
+    if (this.currentQuestion >= this.totalQuestions) {
+      this.emit('complete', {
+        score: this.score,
+        total: this.totalQuestions
+      });
+      return;
+    }
+
+    const q = this.currentQuiz[this.currentQuestion];
+    if (!q || !Array.isArray(q.opts)) {
+      this.emit('complete', {
+        score: this.score,
+        total: this.totalQuestions
+      });
+      return;
+    }
+
+    const qEl = getEl('quiz-question');
+    const optionsEl = getEl('quiz-options');
+    const progressBar = getEl('quiz-progress-bar');
+    const qNum = getEl('quiz-q-num');
+    const btnNext = getEl('btn-next');
+    const scoreText = getEl('quiz-score-text');
+
+    qEl.textContent = q.q;
+
+    const progress = ((this.currentQuestion + 1) / this.totalQuestions) * 100;
+    progressBar.style.width = progress + '%';
+    qNum.textContent = `${this.currentQuestion + 1} / ${this.totalQuestions}`;
+    if (scoreText) scoreText.textContent = String(this.score);
+
+    optionsEl.innerHTML = '';
+    q.opts.forEach((opt, idx) => {
+      const div = document.createElement('div');
+      div.className = 'quiz-option';
+      const letter = document.createElement('div');
+      letter.className = 'opt-letter';
+      letter.textContent = String.fromCharCode(65 + idx);
+
+      const text = document.createElement('span');
+      text.textContent = opt;
+
+      div.appendChild(letter);
+      div.appendChild(text);
+
+      div.addEventListener('click', () => {
+        this.selectAnswer(idx);
+      });
+
+      optionsEl.appendChild(div);
+    });
+
+    btnNext.classList.add('is-hidden');
+    const nextLabel = this.currentQuestion === this.totalQuestions - 1 ? 'Finish Quiz' : 'Next';
+    btnNext.innerHTML = `${nextLabel} <i class="fa-solid fa-arrow-right"></i>`;
+    this.selectedAnswer = null;
+  }
+
+  selectAnswer(optionIndex) {
+    if (this.selectedAnswer !== null) return;
+
+    this.selectedAnswer = optionIndex;
+    const q = this.currentQuiz[this.currentQuestion];
+    const options = document.querySelectorAll('.quiz-option');
+
+    const isCorrect = optionIndex === q.ans;
+    if (isCorrect) {
+      this.score++;
+      const scoreText = getEl('quiz-score-text');
+      if (scoreText) scoreText.textContent = String(this.score);
+      options[optionIndex].classList.add('correct');
+    } else {
+      options[optionIndex].classList.add('wrong');
+      options[q.ans].classList.add('correct');
+    }
+
+    options.forEach((opt, idx) => {
+      opt.classList.add('disabled');
+    });
+
+    const btnNext = getEl('btn-next');
+    btnNext.classList.remove('is-hidden');
+
+    this.emit('answer', { optionIndex, isCorrect });
+  }
+
+  nextQuestion() {
+    if (this.selectedAnswer === null) return;
+
+    const btnNext = getEl('btn-next');
+    if (btnNext) btnNext.classList.add('is-hidden');
+
+    this.currentQuestion++;
+    this.render();
+  }
+
+  getScore() {
+    return { score: this.score, total: this.totalQuestions };
+  }
+
+  on(event, callback) {
+    this.listeners.push({ event, callback });
+  }
+
+  emit(event, data) {
+    this.listeners
+      .filter(l => l.event === event)
+      .forEach(l => l.callback(data));
+  }
+}
+
+
+
+
+FILE: js/utils.js
+================================================================================
+export function getEl(id) {
+  return document.getElementById(id);
+}
+
+export function createElement(tag, className = '', attributes = {}) {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  Object.assign(el, attributes);
+  return el;
+}
+
+export function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+export function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+export function distance(x1, y1, x2, y2) {
+  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+}
+
+export function debounce(func, delay) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+}
+
+export function formatBreadcrumb(branchName, domainName = '', topicName = '') {
+  const parts = [branchName];
+  if (domainName) parts.push('•');
+  if (domainName) parts.push(domainName);
+  if (topicName) parts.push('•');
+  if (topicName) parts.push(topicName);
+
+  return parts.map((part, idx) => {
+    if (part === '•') return `<span class="bc-sep">${part}</span>`;
+    if (idx === parts.length - 1) return `<b>${part}</b>`;
+    return `<span>${part}</span>`;
+  }).join('');
+}
+
+export function animateValue(start, end, duration, callback) {
+  const startTime = Date.now();
+  const animate = () => {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const current = start + (end - start) * progress;
+    callback(current);
+    if (progress < 1) requestAnimationFrame(animate);
+  };
+  animate();
+}
+
+export function isTouchDevice() {
+  return (('ontouchstart' in window) ||
+    (navigator.maxTouchPoints > 0) ||
+    (navigator.msMaxTouchPoints > 0));
+}
+
+export function shuffle(array) {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+export function randomItem(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+export function saveData(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+export function loadData(key, defaultValue = null) {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : defaultValue;
+}
+
+export function clearData(key) {
+  localStorage.removeItem(key);
+}
+
+
+
+
